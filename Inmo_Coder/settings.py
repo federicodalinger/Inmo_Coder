@@ -55,8 +55,8 @@ ROOT_URLCONF = 'Inmo_Coder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["../Inmo_Coder/Plantillas"],
-        # 'DIRS': [],
+        'DIRS': [],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
