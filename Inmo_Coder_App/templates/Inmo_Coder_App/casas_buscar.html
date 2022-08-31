@@ -17,8 +17,15 @@
         <input type="submit", value="Buscar">
 
     </form>
-    
+   <br>
 
+   <h8>{{ titulo }}</h2><br>
+    
+    {% for temp in ubicacion %}
+        
+        <h12>{{ temp.ubicacion }}, {{ temp.ambientes }}, ${{ temp.precio }} , {{ temp.contacto_nombre }}, {{ temp.telefono_contacto}}, {{ temp.contacto_email }} , {{ temp.fecha_de_alta }} </h3><br>
+
+    {% endfor %}
 
 {% endblock %}
 

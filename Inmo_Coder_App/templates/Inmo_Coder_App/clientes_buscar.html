@@ -11,9 +11,14 @@
 {% block contenido_que_cambia %}
 
     <h1>CONTENIDO DE "CLIENTES-BUSCAR"</h1>
-
+"--------agregado pruebas"
+    <h8>Ubicacion, Cantidad Ambientes, Precio, Nombre de Contacto, Telefono de Contacto, Email, Fecha de Alta</h2><br>
     
+        {% for temp in ubicacion %}
+            
+            <h12>{{ temp.ubicacion }}, {{ temp.ambientes }}, ${{ temp.precio }} , {{ temp.contacto_nombre }}, {{ temp.telefono_contacto}}, {{ temp.contacto_email }} , {{ temp.fecha_de_alta }} </h3><br>
 
+        {% endfor %}
 
 {% endblock %}
 
