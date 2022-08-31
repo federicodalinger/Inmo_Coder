@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import *
+from .models import *
 from Inmo_Coder_App.forms import CocherasFormulario, ClientesFormulario
 
 # Create your views here.
@@ -42,7 +42,7 @@ def cocheras_cargar (request):
     else:
         form_cocheras = CocherasFormulario()
 
-    return render (request, "Inmo_Coder_App/cocheras_cargar.html")
+    return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras})
 
 def cocheras_buscar (request):
     return render (request, "Inmo_Coder_App/cocheras_buscar.html")
