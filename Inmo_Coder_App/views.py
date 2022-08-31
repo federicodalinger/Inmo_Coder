@@ -39,15 +39,15 @@ def casas_cargar (request):
 #############################################################################
 
 def casas_buscar (request):
-
-    return render (request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html")
+    cabecera="Busqueda Casas"
+    return render (request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html",{"cabecera":cabecera})
 
 def buscarcasa(request):
     respuesta=request.GET.get('ubicacion')
     casas = Casas.objects.filter(ubicacion=respuesta)
     titulo="Ubicacion, Cantidad Ambientes, Precio, Nombre de Contacto, Telefono de Contacto, Email, Fecha de Alta"
-    #return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/resultado_casas.html", {"ubicacion":casas})
-    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html",{"titulo":titulo,"ubicacion":casas})
+    cabecera="Resultado Busqueda Casas"
+    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html",{"cabecera":cabecera,"titulo":titulo,"ubicacion":casas})
     #return HttpResponse(f"Casas con la ubicacion en: {respuesta}")
 
 
@@ -79,16 +79,17 @@ def departamentos_cargar (request):
 ################################################################
 
 def departamentos_buscar (request):
-    return render (request, "Inmo_Coder_App/departamentos_buscar.html")
+    cabecera="Busqueda Departamentos"
+    return render (request, "Inmo_Coder_App/departamentos_buscar.html",{"cabecera":cabecera})
 
 def buscardepto(request):
     respuesta=request.GET.get('ubicacion')
     depto = Departamentos.objects.filter(ubicacion=respuesta)
-    
+    cabecera="Resultado Busqueda Departamentos"
     #return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/resultado_deptos.html", {"ubicacion":depto})
     titulo="Ubicacion, Cantidad Ambientes, Precio, Nombre de Contacto, Telefono de Contacto, Email, Fecha de Alta"
     
-    return render(request, "Inmo_Coder_App/departamentos_buscar.html",{"titulo":titulo,"ubicacion":depto})
+    return render(request, "Inmo_Coder_App/departamentos_buscar.html",{"cabecera":cabecera,"titulo":titulo,"ubicacion":depto})
 
 ################# Views referida a COCHERAS: ################
 def cocheras_cargar (request):
