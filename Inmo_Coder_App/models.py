@@ -2,15 +2,13 @@ from django.db import models
 
 # Create your models here.
 
-class Casas (models.Model):
+class Casas(models.Model):
     ubicacion = models.CharField(max_length=100)
     ambientes = models.IntegerField()
     precio = models.IntegerField()
-    
     contacto_nombre = models.CharField(max_length=100)
     contacto_telefono = models.IntegerField()
     contacto_email = models.EmailField()
-
     fecha_de_alta = models.DateField()
 
     def __str__(self):
