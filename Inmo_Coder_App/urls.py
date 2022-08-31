@@ -10,6 +10,7 @@ urlpatterns = [
     path("casas_cargar/", casas_cargar, name="casas_cargar"),
 
     path("departamentos_buscar/", departamentos_buscar, name="departamentos_buscar"),
+    path('buscarcasa/',buscarcasa, name='buscarcasa'),
     path("departamentos_cargar/", departamentos_cargar, name="departamentos_cargar"),
 
     path("cocheras_buscar/", cocheras_buscar, name="cocheras_buscar"),

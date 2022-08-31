@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from http.client import HTTPResponse
+from pickletools import read_unicodestring1
+from django.shortcuts import render, HttpResponse
 
 from Inmo_Coder_App.forms import Cargocasa,Deptocarga
 from Inmo_Coder_App.models import Casas,Departamentos
@@ -15,13 +17,13 @@ def casas_cargar (request):
         miformulario = Cargocasa(request.POST)
         if miformulario.is_valid():
             info = miformulario.cleaned_data
-            v_ubicacion=info.get("c_ubicacion")
-            v_ambientes=info.get("c_ambientes")
-            v_precio=info.get("c_precio")
-            v_contacto=info.get("c_contacto_nombre")
-            v_telefono=info.get("c_contacto_telefono")
-            v_email=info.get("c_contacto_email")
-            v_fecha=info.get("c_fecha_alta")
+            v_ubicacion=info.get("ubicacion")
+            v_ambientes=info.get("ambientes")
+            v_precio=info.get("precio")
+            v_contacto=info.get("contacto_nombre")
+            v_telefono=info.get("contacto_telefono")
+            v_email=info.get("contacto_email")
+            v_fecha=info.get("fecha_alta")
             print("Entro")
                         
             casa = Casas(ubicacion=v_ubicacion,ambientes=v_ambientes,precio=v_precio,contacto_nombre=v_contacto,contacto_telefono=v_telefono,contacto_email=v_email,fecha_de_alta=v_fecha)
@@ -34,10 +36,18 @@ def casas_cargar (request):
         print("hola")
         return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/casas_cargar.html", {"miformulario":miformulario})
 
-
+#############################################################################
 
 def casas_buscar (request):
-    return render (request, "Inmo_Coder_App/casas_buscar.html")
+
+    return render (request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html")
+
+def buscarcasa(request):
+    respuesta=request.GET.get('ubicacion')
+    casas = Casas.objects.filter(ubicacion=respuesta)
+    print("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/resultado_casas.html", {"ubicacion":casas})
+    #return HttpResponse(f"Casas con la ubicacion en: {respuesta}")
 
 
 ################# Views referida a DEPARTAMENTOS: ################
@@ -46,13 +56,13 @@ def departamentos_cargar (request):
         miformulario = Deptocarga(request.POST)
         if miformulario.is_valid():
             info = miformulario.cleaned_data
-            v_ubicacion=info.get("c_ubicacion")
-            v_ambientes=info.get("c_ambientes")
-            v_precio=info.get("c_precio")
-            v_contacto=info.get("c_contacto_nombre")
-            v_telefono=info.get("c_contacto_telefono")
-            v_email=info.get("c_contacto_email")
-            v_fecha=info.get("c_fecha_alta")
+            v_ubicacion=info.get("ubicacion")
+            v_ambientes=info.get("ambientes")
+            v_precio=info.get("precio")
+            v_contacto=info.get("contacto_nombre")
+            v_telefono=info.get("contacto_telefono")
+            v_email=info.get("contacto_email")
+            v_fecha=info.get("fecha_alta")
 
                         
             casa = Departamentos(ubicacion=v_ubicacion,ambientes=v_ambientes,precio=v_precio,contacto_nombre=v_contacto,contacto_telefono=v_telefono,contacto_email=v_email,fecha_de_alta=v_fecha)

@@ -12,6 +12,11 @@
 
     <h1>CONTENIDO DE "CASAS-BUSCAR"</h1>
 
+    <form action="{% url 'buscarcasa' %}" method="GET"> {% csrf_token %}
+        <p>Ubicacion: <input label="Ubicacion" type="text" name="ubicacion" id="ubicacion"></p>
+        <input type="submit", value="Buscar">
+
+    </form>
     
 
 
