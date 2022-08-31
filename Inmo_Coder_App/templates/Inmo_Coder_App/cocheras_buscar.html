@@ -10,7 +10,15 @@
 
 {% block contenido_que_cambia %}
 
-<h1>CONTENIDO DE "COCHERAS-BUSCAR"</h1>
+<h1>Busqueda por ubicacion</h1>
+
+<form action="{% url 'buscarcocheras' %}" method="GET"> {% csrf_token %}
+
+    <p>Ubicacion:<input type="text" name="ubicacion", id="ubicacion"></p>
+ 
+    <input type="submit", value="Buscar">
+    
+    </form>
 
 
 

@@ -1,0 +1,23 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">BUSCAR<br>COCHERAS</h1>
+    
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<h1>Resultado de la busqueda de clientes</h1>
+
+{% for cliente in clientes %}
+
+<h2>{{ cliente.contacto_nombre }}</h2>
+--
+
+{% endfor %}
+
+{% endblock %}
+

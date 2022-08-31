@@ -46,6 +46,14 @@ def cocheras_cargar (request):
 def cocheras_buscar (request):
     return render (request, "Inmo_Coder_App/cocheras_buscar.html")
 
+def buscarcocheras (request):
+    ubi=request.GET["ubicacion"]
+    cocheras=Cocheras.objects.filter(ubicacion=ubi)
+    return render(request, "Inmo_Coder_App/cocheras_resultado.html", {"ubicacion":cocheras})
+    
+
+
+
 
 ################# Views referida a CLIENTES: ################
 def clientes_cargar (request):
@@ -67,4 +75,9 @@ def clientes_cargar (request):
 
 def clientes_buscar (request):
     return render (request, "Inmo_Coder_App/clientes_buscar.html")
+
+def buscarclientes (request):
+    contacto=request.GET["contacto_nombre"]
+    cliente=Clientes.objects.filter(contacto_nombre=contacto)
+    return render(request, "Inmo_Coder_App/clientes_resultado.html", {"contacto_nombre":cliente})
 

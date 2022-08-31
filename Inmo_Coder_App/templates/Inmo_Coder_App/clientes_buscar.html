@@ -10,10 +10,16 @@
 
 {% block contenido_que_cambia %}
 
-    <h1>CONTENIDO DE "CLIENTES-BUSCAR"</h1>
+<h1>Busqueda por nombre</h1>
 
+<form action="{% url 'buscarclientes' %}" method="GET"> {% csrf_token %}
+
+    <p>Nombre:<input type="text" name="contacto_nombre", id="contacto_nombre"></p>
+ 
+    <input type="submit", value="Buscar">
     
+    </form>
+
 
 
 {% endblock %}
-
