@@ -10,9 +10,18 @@
 
 {% block contenido_que_cambia %}
 
-    <h1>CONTENIDO DE "CLIENTES-CARGAR"</h1>
+<form action="{% url 'clientes_cargar' %}" method="POST"> {% csrf_token %}
 
+    <table>
     
+        {{ form_clientes.as_table }}
+    
+    </table>
+    
+    <input type="submit", value="Enviar">
+    
+    </form>
+
 
 
 {% endblock %}

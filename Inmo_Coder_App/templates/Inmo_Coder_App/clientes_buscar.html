@@ -10,8 +10,27 @@
 
 {% block contenido_que_cambia %}
 
-    <h1>CONTENIDO DE "CLIENTES-BUSCAR"</h1>
+<h1>{{ busqueda_nombre }}</h1>
 
+<<<<<<< HEAD
+=======
+<form action="{% url 'buscarclientes' %}" method="GET"> {% csrf_token %}
+
+    <p>Nombre:<input type="text" name="contacto_nombre", id="contacto_nombre"></p>
+ 
+    <input type="submit", value="Buscar">
+    
+</form>
+<h8>{{ titulo }}</h8>
+<br>
+
+{% for cliente in contacto_nombre %}
+
+<h12>{{ cliente.contacto_nombre }}, {{ cliente.contacto_telefono }}, {{ cliente.contacto_email }}</h12>
+--
+
+{% endfor %}
+>>>>>>> feligoi
 
 
 {% endblock %}

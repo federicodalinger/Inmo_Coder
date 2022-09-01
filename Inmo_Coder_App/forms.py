@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 from socket import fromshare
+=======
+>>>>>>> feligoi
 from django import forms
 
 class CocherasFormulario(forms.Form):

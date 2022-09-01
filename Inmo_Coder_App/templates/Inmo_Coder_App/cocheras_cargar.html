@@ -10,10 +10,17 @@
 
 {% block contenido_que_cambia %}
 
-    <h1>CONTENIDO DE "COCHERAS-CARGAR"</h1>
+<form action="{% url 'cocheras_cargar' %}" method="POST"> {% csrf_token %}
 
-    
+<table>
 
+    {{ form_cocheras.as_table }}
+
+</table>
+
+<input type="submit", value="Enviar">
+
+</form>
 
 {% endblock %}
 
