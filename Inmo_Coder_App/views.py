@@ -44,12 +44,15 @@ def cocheras_cargar (request):
         return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras})
 
 def cocheras_buscar (request):
-    return render (request, "Inmo_Coder_App/cocheras_buscar.html")
+    cabecera = "Busqueda de Cocheras"
+    return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"busqueda_nombre":cabecera})
 
 def buscarcocheras (request):
-    ubi=request.GET["ubicacion"]
+    cabecera = "Resultado de Búsqueda de Cocheras"
+    titulo = "Ubicación, Precio, Nombre, teléfono, E-mail"
+    ubi=request.GET.get("ubicacion")
     cocheras=Cocheras.objects.filter(ubicacion=ubi)
-    return render(request, "Inmo_Coder_App/cocheras_resultado.html", {"ubicacion":cocheras})
+    return render(request, "Inmo_Coder_App/cocheras_buscar.html", {"ubicacion":cocheras, "busqueda_nombre":cabecera, "titulo":titulo})
     
 
 
@@ -74,10 +77,13 @@ def clientes_cargar (request):
         return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes})
 
 def clientes_buscar (request):
-    return render (request, "Inmo_Coder_App/clientes_buscar.html")
+    cabecera = "Busqueda de Clientes"
+    return render (request, "Inmo_Coder_App/clientes_buscar.html", {"busqueda_nombre":cabecera})
 
 def buscarclientes (request):
-    contacto=request.GET["contacto_nombre"]
+    cabecera = "Resultado de Búsqueda de Clientes"
+    titulo = "Nombre, teléfono, E-mail"
+    contacto=request.GET.get("contacto_nombre")
     cliente=Clientes.objects.filter(contacto_nombre=contacto)
-    return render(request, "Inmo_Coder_App/clientes_resultado.html", {"contacto_nombre":cliente})
+    return render(request, "Inmo_Coder_App/clientes_buscar.html", {"contacto_nombre":cliente, "busqueda_nombre":cabecera, "titulo":titulo})
 

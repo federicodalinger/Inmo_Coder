@@ -10,7 +10,7 @@
 
 {% block contenido_que_cambia %}
 
-<h1>Busqueda por ubicacion</h1>
+<h1>{{ busqueda_nombre }}</h1>
 
 <form action="{% url 'buscarcocheras' %}" method="GET"> {% csrf_token %}
 
@@ -19,6 +19,17 @@
     <input type="submit", value="Buscar">
     
     </form>
+
+<h8>{{ titulo }}</h8>
+<br>
+
+{% for cochera in ubicacion %}
+
+<h12>{{ cochera.ubicacion }}, {{ cochera.precio }}, {{ cochera.contacto_nombre }}, {{ cochera.contacto_telefono }}, {{ cochera.contacto_email }}</h12>
+
+--
+
+{% endfor %}
 
 
 
