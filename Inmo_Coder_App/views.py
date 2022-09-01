@@ -45,15 +45,13 @@ def casas_cargar (request):
 #############################################################################
 
 def casas_buscar (request):
-    cabecera="Busqueda Casas"
-    return render (request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html",{"cabecera":cabecera})
+    return render (request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html")
 
 def buscarcasa(request):
     respuesta=request.GET.get('ubicacion')
     casas = Casas.objects.filter(ubicacion=respuesta)
     titulo="Ubicacion, Cantidad Ambientes, Precio, Nombre de Contacto, Telefono de Contacto, Email, Fecha de Alta"
-    cabecera="Resultado Busqueda Casas"
-    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html",{"cabecera":cabecera,"titulo":titulo,"ubicacion":casas})
+    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html",{"titulo":titulo,"ubicacion":casas})
     #return HttpResponse(f"Casas con la ubicacion en: {respuesta}")
 
 
@@ -85,17 +83,15 @@ def departamentos_cargar (request):
 ################################################################
 
 def departamentos_buscar (request):
-    cabecera="Busqueda Departamentos"
-    return render (request, "Inmo_Coder_App/departamentos_buscar.html",{"cabecera":cabecera})
+    return render (request, "Inmo_Coder_App/departamentos_buscar.html")
 
 def buscardepto(request):
     respuesta=request.GET.get('ubicacion')
     depto = Departamentos.objects.filter(ubicacion=respuesta)
-    cabecera="Resultado Busqueda Departamentos"
     #return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/resultado_deptos.html", {"ubicacion":depto})
     titulo="Ubicacion, Cantidad Ambientes, Precio, Nombre de Contacto, Telefono de Contacto, Email, Fecha de Alta"
     
-    return render(request, "Inmo_Coder_App/departamentos_buscar.html",{"cabecera":cabecera,"titulo":titulo,"ubicacion":depto})
+    return render(request, "Inmo_Coder_App/departamentos_buscar.html",{"titulo":titulo,"ubicacion":depto})
 
 ################# Views referida a COCHERAS: ################
 def cocheras_cargar (request):
@@ -117,15 +113,13 @@ def cocheras_cargar (request):
         return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras})
 
 def cocheras_buscar (request):
-    cabecera = "Busqueda de Cocheras"
-    return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"busqueda_nombre":cabecera})
+    return render (request, "Inmo_Coder_App/cocheras_buscar.html")
 
 def buscarcocheras (request):
-    cabecera = "Resultado de Búsqueda de Cocheras"
     titulo = "Ubicación, Precio, Nombre, teléfono, E-mail"
     ubi=request.GET.get("ubicacion")
     cocheras=Cocheras.objects.filter(ubicacion=ubi)
-    return render(request, "Inmo_Coder_App/cocheras_buscar.html", {"ubicacion":cocheras, "busqueda_nombre":cabecera, "titulo":titulo})
+    return render(request, "Inmo_Coder_App/cocheras_buscar.html", {"ubicacion":cocheras, "titulo":titulo})
     
 
 

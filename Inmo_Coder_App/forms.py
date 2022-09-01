@@ -2,7 +2,9 @@
 #<<<<<<< HEAD
 #=======
 #>>>>>>> feligoi
+from datetime import datetime
 from django import forms
+import datetime
 
 class CocherasFormulario(forms.Form):
     ubicacion = forms.CharField(max_length=100)
@@ -10,7 +12,7 @@ class CocherasFormulario(forms.Form):
     contacto_nombre = forms.CharField(max_length=100)
     contacto_telefono = forms.IntegerField()
     contacto_email = forms.EmailField()
-    fecha_de_alta = forms.DateField()
+    fecha_de_alta = forms.DateField(initial=datetime.date.today)
 
 class ClientesFormulario(forms.Form):
     motivo_descripcion = forms.CharField(max_length=100) # Esto seria el motivo por el cual es nuestro cliente (por ejemplo: "venta de.../compra de.../alquiler de...").
@@ -19,11 +21,11 @@ class ClientesFormulario(forms.Form):
     contacto_nombre = forms.CharField(max_length=100)
     contacto_telefono = forms.IntegerField()
     contacto_email = forms.EmailField()
-    fecha_de_alta = forms.DateField()
+    fecha_de_alta = forms.DateField(initial=datetime.date.today)
 #=======
-from datetime import datetime
-from django import forms
-import datetime
+# from datetime import datetime
+# from django import forms
+# import datetime
 
 
 class Cargocasa(forms.Form):
