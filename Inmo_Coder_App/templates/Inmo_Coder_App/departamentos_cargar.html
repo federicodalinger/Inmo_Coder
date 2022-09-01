@@ -5,7 +5,16 @@
 {% block titulo_de_pagina %}
 
     <h1 class="mb-5">CARGAR<br>DEPARTAMENTOS</h1>
-    
+    <form action="" method="POST">{% csrf_token %}
+
+        <table>
+
+        {{ miformulario.as_table }}
+        
+
+        </table>
+        <br>
+        <input type="submit", value="Enviar">
 {% endblock %}
 
 {% block contenido_que_cambia %}

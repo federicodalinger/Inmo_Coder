@@ -10,10 +10,22 @@
 
 {% block contenido_que_cambia %}
 
-    <h1>CONTENIDO DE "CASAS-BUSCAR"</h1>
+    <h1> {{ cabecera }} </h1>
 
+    <form action="{% url 'buscarcasa' %}" method="GET"> {% csrf_token %}
+        <p>Ubicacion: <input label="Ubicacion" type="text" name="ubicacion" id="ubicacion"></p>
+        <input type="submit", value="Buscar">
+
+    </form>
+   <br>
+
+   <h8>{{ titulo }}</h2><br>
     
+    {% for temp in ubicacion %}
+        
+        <h12>{{ temp.ubicacion }}, {{ temp.ambientes }}, ${{ temp.precio }} , {{ temp.contacto_nombre }}, {{ temp.telefono_contacto}}, {{ temp.contacto_email }} , {{ temp.fecha_de_alta }} </h3><br>
 
+    {% endfor %}
 
 {% endblock %}
 

@@ -4,7 +4,22 @@
 
 {% block titulo_de_pagina %}
 
-    <h1 class="mb-5">CARGAR<br>CASAS</h1>
+    <h1 class="mb-5">CARGAR<br>CASAS </h1>
+    
+    <form action="" method="POST">{% csrf_token %}
+
+        <table>
+
+        {{ miformulario.as_table }}
+        
+
+        </table>
+        <br>
+        <input type="submit", value="Enviar">
+    </form>
+        
+      
+    
     
 {% endblock %}
 
