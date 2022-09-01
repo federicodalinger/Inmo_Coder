@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-from socket import fromshare
-=======
->>>>>>> feligoi
+#<<<<<<< HEAD
+#<<<<<<< HEAD
+#=======
+#>>>>>>> feligoi
 from django import forms
 
 class CocherasFormulario(forms.Form):
@@ -21,9 +20,8 @@ class ClientesFormulario(forms.Form):
     contacto_telefono = forms.IntegerField()
     contacto_email = forms.EmailField()
     fecha_de_alta = forms.DateField()
-=======
+#=======
 from datetime import datetime
-from socket import fromshare
 from django import forms
 import datetime
 
@@ -46,4 +44,4 @@ class Deptocarga(forms.Form):
     contacto_telefono=forms.IntegerField()
     contacto_email=forms.EmailField()
     fecha_alta=forms.DateField(initial=datetime.date.today)
->>>>>>> fede-branch
+#>>>>>>> fede-branch

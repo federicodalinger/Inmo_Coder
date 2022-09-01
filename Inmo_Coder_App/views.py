@@ -1,15 +1,15 @@
-<<<<<<< HEAD
+#<<<<<<< HEAD
 from django.shortcuts import render
 from .models import *
 from Inmo_Coder_App.forms import CocherasFormulario, ClientesFormulario
-=======
+#=======
 from http.client import HTTPResponse
 from pickletools import read_unicodestring1
 from django.shortcuts import render, HttpResponse
 
 from Inmo_Coder_App.forms import Cargocasa,Deptocarga
 from Inmo_Coder_App.models import Casas,Departamentos
->>>>>>> fede-branch
+#>>>>>>> fede-branch
 
 # Create your views here.
 
