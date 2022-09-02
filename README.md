@@ -7,12 +7,15 @@ Integrantes: Federico La Volpe | Federico Walter Dalinger | Felipe Goicoechea
 
 Landing page: http://127.0.0.1:8000/Inmo_Coder_App/
 
-Descripcion:
-    0. Motivo del proyecto: Se trata de una pagina de administracion de una inmobiliaria. Podria tener caracter publico o privado, aunque eso queda a criterio del poseedor del sitio. Los datos de cada propiedad y clientes son los tipicos que se encuentran en operaciones inmobilirarias, indicados en los modelos (models.py), y ahi mismo las caracteristicas de c/u.
-        0.1. Para el ingreso de la base de datos, se debe ejecutar http://127.0.0.1:8000/admin/.
-            0.1.1. Superusuario: Nombre --> admin | Password --> admin
-            0.1.2. Ahi mismo se pueden ver los modelos mencionados, con las propiedades y clientes cargados.
-                0.1.2.1. Extra: usamos un def "str" para mejor visual de los datos en la base de datos.
+Motivo del proyecto: 
+
+Se trata de una pagina de administracion de una inmobiliaria. Podria tener caracter publico o privado, aunque eso queda a criterio del poseedor del sitio. Los datos de cada propiedad y clientes son los tipicos que se encuentran en operaciones inmobilirarias, indicados en los modelos (models.py), y ahi mismo las caracteristicas de c/u.
+
+Acceder a la base de datos:
+
+Superusuario: Nombre --> admin | Password --> admin
+Ahi mismo se pueden ver los modelos mencionados, con las propiedades y clientes cargados.
+Extra: usamos un def "str" para mejor visual de los datos en la base de datos.
 
     1. En la parte superior (head) se encuentran los botones que llevan a las diversas .html.
         1.1. CARGA: Hay 4 botones de carga con formulario para ingresar informacion segun los modelos (clases) en models.py
