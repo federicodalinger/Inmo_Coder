@@ -10,17 +10,36 @@
 
 {% block contenido_que_cambia %}
 
-<form action="{% url 'cocheras_cargar' %}" method="POST"> {% csrf_token %}
+<br>
 
-<table>
+<div class="container">
+    <div class="abs-center">
+    
+        <form action="{% url 'cocheras_cargar' %}" method="POST" class="border p-3 form"> {% csrf_token %}
 
-    {{ form_cocheras.as_table }}
+            <div class="abs-center">               
+                <table>
+                    {{ form_cocheras.as_table }}
+                </table>
+            </div>
 
-</table>
+            <br>
 
-<input type="submit", value="Enviar">
+            <div class="abs-center">
+                <input  type="submit", value="Cargar cochera" class="btn btn-primary">
+            </div>
+                
+        </form>
+        
+    </div>
 
-</form>
+    <br>
+
+    <div class="abs-center">
+        <h3> {{ mensaje }}</h3>
+    </div>
+
+</div>
 
 {% endblock %}
 

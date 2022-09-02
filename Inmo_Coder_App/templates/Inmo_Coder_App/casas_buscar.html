@@ -10,22 +10,73 @@
 
 {% block contenido_que_cambia %}
 
-    <!-- <h1> {{ cabecera }} </h1> -->
 
-    <form action="{% url 'buscarcasa' %}" method="GET"> {% csrf_token %}
-        <p>Ubicacion: <input label="Ubicacion" type="text" name="ubicacion" id="ubicacion"></p>
-        <input type="submit", value="Buscar">
+<br>
 
-    </form>
-   <br>
-
-   <h8>{{ titulo }}</h2><br>
+<div class="container">
+    <div class="abs-center">
     
-    {% for temp in ubicacion %}
-        
-        <h12>{{ temp.ubicacion }}, {{ temp.ambientes }}, ${{ temp.precio }} , {{ temp.contacto_nombre }}, {{ temp.telefono_contacto}}, {{ temp.contacto_email }} , {{ temp.fecha_de_alta }} </h3><br>
+        <form action="{% url 'casas_buscar' %}" method="POST" class="border p-3 form"> {% csrf_token %}
 
-    {% endfor %}
+            <div class="abs-center">
+                <p>Ubicacion: <input type="text" name="ubicacion", id="ubicacion"></p>
+            </div>
+            
+            <div class="abs-center">
+                <input  type="submit", value="Buscar casa" class="btn btn-primary">
+            </div>
+                
+        </form>
+        
+    </div>
+
+    <br>
+
+    <div class="abs-center">
+
+        {% if ocultar_contenido_inicial %}
+
+        {% else %}
+
+        {% if mensaje %}
+            <h8>{{ mensaje }}</h8>
+            
+        {% else %}
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="clases_para_th_td">{{ titulo.contacto_nombre }}</th>
+                        <th class="clases_para_th_td">{{ titulo.contacto_telefono }}</th>
+                        <th class="clases_para_th_td">{{ titulo.contacto_email }}</th>
+                        <th class="clases_para_th_td">{{ titulo.ambientes }}</th>
+                        <th class="clases_para_th_td">{{ titulo.precio }}</th>
+                        <th class="clases_para_th_td">{{ titulo.ubicacion }}</th>
+                        <th class="clases_para_th_td">{{ titulo.fecha_de_alta }}</th>
+                    </tr> 
+                
+                    {% for casa in casas %}    
+                    <tr>
+                        <td class="clases_para_th_td">{{ casa.contacto_nombre }}</td>
+                        <td class="clases_para_th_td">{{ casa.contacto_telefono }}</td>
+                        <td class="clases_para_th_td">{{ casa.contacto_email }}</td>
+                        <td class="clases_para_th_td">{{ casa.ambientes }}</td>
+                        <td class="clases_para_th_td">{{ casa.precio }}</td>
+                        <td class="clases_para_th_td">{{ casa.ubicacion }}</td>
+                        <td class="clases_para_th_td">{{ casa.fecha_de_alta }}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            
+        {% endif %}
+        {% endif %}
+        
+    </div>
+
+    <br>
+
+</div>
 
 {% endblock %}
 

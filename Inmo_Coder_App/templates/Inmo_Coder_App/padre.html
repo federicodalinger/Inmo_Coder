@@ -17,30 +17,56 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static '/Inmo_Coder_App/css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static '/Inmo_Coder_App/css/styles_tables.css' %}" rel="stylesheet" />
     </head>
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <!-- <a class="navbar-brand" href="{% url 'inicio' %}">INICIO</a> LLEVAME A LA URL CON NOMBRE "INICIO" -->
                 <a class="btn btn-info" href="{% url 'inicio' %}">Inicio</a> <!--LLEVAME A LA URL CON NOMBRE "INICIO"-->
 
-                <a class="btn btn-success" href="{% url 'casas_buscar' %}">Casas-Busca</a>
-                <a class="btn btn-warning" href="{% url 'casas_cargar' %}">Casas-Carga</a>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Casas</a>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url 'casas_buscar' %}">Buscar casas</a></li>
+                      <li><a class="dropdown-item" href="{% url 'casas_cargar' %}">Cargar casas</a></li>
+                    </ul>
+                </div>
 
-                <a class="btn btn-success" href="{% url 'departamentos_buscar' %}">Deptos-Busca</a>
-                <a class="btn btn-warning" href="{% url 'departamentos_cargar' %}">Deptos-Carga</a>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Departamentos</a>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url 'departamentos_buscar' %}">Buscar departamentos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'departamentos_cargar' %}">Cargar departamentos</a></li>
+                    </ul>
+                </div>
 
-                <a class="btn btn-success" href="{% url 'cocheras_buscar' %}">Cocheras-Busca</a>
-                <a class="btn btn-warning" href="{% url 'cocheras_cargar' %}">Cocheras-Carga</a>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Cocheras</a>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url 'cocheras_buscar' %}">Buscar cocheras</a></li>
+                      <li><a class="dropdown-item" href="{% url 'cocheras_cargar' %}">Cargar cocheras</a></li>
+                    </ul>
+                </div>
 
-                <a class="btn btn-success" href="{% url 'clientes_buscar' %}">Clientes-Busca</a>
-                <a class="btn btn-warning" href="{% url 'clientes_cargar' %}">Clientes-Carga</a>
-
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href="{% url 'clientes_buscar' %}">Buscar clientes</a></li>
+                      <li><a class="dropdown-item" href="{% url 'clientes_cargar' %}">Carga clientes</a></li>
+                    </ul>
+                </div>
+                
                 <a class="btn btn-info" href="#integrantes">Integrantes</a>
 
+                <a class="btn btn-primary" href="http://127.0.0.1:8000/admin/">Administrador</a>
             </div>
         </nav>
+
         <!-- Masthead-->
         <header class="masthead">
             <div class="container position-relative">

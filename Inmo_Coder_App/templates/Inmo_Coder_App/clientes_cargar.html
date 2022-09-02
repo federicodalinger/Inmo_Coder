@@ -10,18 +10,36 @@
 
 {% block contenido_que_cambia %}
 
-<form action="{% url 'clientes_cargar' %}" method="POST"> {% csrf_token %}
+<br>
 
-    <table>
+<div class="container">
+    <div class="abs-center">
     
-        {{ form_clientes.as_table }}
-    
-    </table>
-    
-    <input type="submit", value="Enviar">
-    
-    </form>
+        <form action="{% url 'clientes_cargar' %}" method="POST" class="border p-3 form"> {% csrf_token %}
 
+            <div class="abs-center">               
+                <table>
+                    {{ form_clientes.as_table }}
+                </table>
+            </div>
+
+            <br>
+
+            <div class="abs-center">
+                <input  type="submit", value="Cargar cliente" class="btn btn-primary">
+            </div>
+                
+        </form>
+        
+    </div>
+
+    <br>
+
+    <div class="abs-center">
+        <h3> {{ mensaje }}</h3>
+    </div>
+
+</div>
 
 
 {% endblock %}

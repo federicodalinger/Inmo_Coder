@@ -8,18 +8,15 @@ urlpatterns = [
 
     path("casas_buscar/", casas_buscar, name="casas_buscar"),
     path("casas_cargar/", casas_cargar, name="casas_cargar"),
-    path('buscarcasa/',buscarcasa, name='buscarcasa'),
 
     path("departamentos_buscar/", departamentos_buscar, name="departamentos_buscar"),
     path("departamentos_cargar/", departamentos_cargar, name="departamentos_cargar"),
-    path('buscardepto/',buscardepto, name='buscardepto'),
 
     path("cocheras_buscar/", cocheras_buscar, name="cocheras_buscar"),
     path("cocheras_cargar/", cocheras_cargar, name="cocheras_cargar"),
-    path("buscarcocheras/", buscarcocheras, name="buscarcocheras"),
 
     path("clientes_buscar/", clientes_buscar, name="clientes_buscar"),
     path("clientes_cargar/", clientes_cargar, name="clientes_cargar"),
-    path("buscarclientes/", buscarclientes, name="buscarclientes"),
+
 
 ]

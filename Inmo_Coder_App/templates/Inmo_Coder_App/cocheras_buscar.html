@@ -10,27 +10,71 @@
 
 {% block contenido_que_cambia %}
 
-<!-- <h1>{{ busqueda_nombre }}</h1> -->
 
-<form action="{% url 'buscarcocheras' %}" method="GET"> {% csrf_token %}
-
-    <p>Ubicacion:<input type="text" name="ubicacion", id="ubicacion"></p>
- 
-    <input type="submit", value="Buscar">
-    
-    </form>
-
-<h8>{{ titulo }}</h8>
 <br>
 
-{% for cochera in ubicacion %}
+<div class="container">
+    <div class="abs-center">
+  
+        <form action="{% url 'cocheras_buscar' %}" method="POST" class="border p-3 form"> {% csrf_token %}
 
-<h12>{{ cochera.ubicacion }}, {{ cochera.precio }}, {{ cochera.contacto_nombre }}, {{ cochera.contacto_telefono }}, {{ cochera.contacto_email }}</h12>
+            <div class="abs-center">
+                <p>Ubicacion: <input type="text" name="ubicacion", id="ubicacion"></p>
+            </div>
+            
+            <div class="abs-center">
+                <input  type="submit", value="Buscar cochera" class="btn btn-primary">
+            </div>
+                
+        </form>
+        
+    </div>
 
---
+    <br>
 
-{% endfor %}
+    <div class="abs-center">
 
+        {% if ocultar_contenido_inicial %}
+
+        {% else %}
+
+        {% if mensaje %}
+            <h8>{{ mensaje }}</h8>
+            
+        {% else %}
+            <table>
+                <tbody>
+                    <tr>
+                        <th class="clases_para_th_td">{{ titulo.contacto_nombre }}</th>
+                        <th class="clases_para_th_td">{{ titulo.contacto_telefono }}</th>
+                        <th class="clases_para_th_td">{{ titulo.contacto_email }}</th>
+                        <th class="clases_para_th_td">{{ titulo.precio }}</th>
+                        <th class="clases_para_th_td">{{ titulo.ubicacion }}</th>
+                        <th class="clases_para_th_td">{{ titulo.fecha_de_alta }}</th>
+                    </tr> 
+                
+                    {% for cochera in cocheras %}    
+                    <tr>
+                        <td class="clases_para_th_td">{{ cochera.contacto_nombre }}</td>
+                        <td class="clases_para_th_td">{{ cochera.contacto_telefono }}</td>
+                        <td class="clases_para_th_td">{{ cochera.contacto_email }}</td>
+                        <td class="clases_para_th_td">{{ cochera.precio }}</td>
+                        <td class="clases_para_th_td">{{ cochera.ubicacion }}</td>
+                        <td class="clases_para_th_td">{{ cochera.fecha_de_alta }}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            
+        {% endif %}
+        {% endif %}
+        
+    </div>
+
+    <br>
+
+</div>
 
 
 {% endblock %}

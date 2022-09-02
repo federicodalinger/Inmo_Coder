@@ -59,4 +59,4 @@ class Clientes (models.Model):
 
     def __str__(self):
         #ESTO ES COMO VOY A VER MI BASE DE DATOS EN "ADMIN":
-        return "Contacto -> Nombre: " + self.contacto_nombre + ", Teléfono: " + str(self.contacto_telefono) + ", E-mail: " + self.contacto_email + "Motivo -> Detalle: " + self.motivo_descripcion + ", Ubicación: " + self.motivo_ubicacion + ", Precio: " + str(self.precio) + " | Fecha de publicación: " + str(self.fecha_de_alta)  + " |"
+        return "Contacto -> Nombre: " + self.contacto_nombre + ", Teléfono: " + str(self.contacto_telefono) + ", E-mail: " + self.contacto_email + "Motivo -> Detalle: " + self.motivo_descripcion + ", Ubicación: " + self.motivo_ubicacion + ", Precio: " + str(self.motivo_precio) + " | Fecha de publicación: " + str(self.fecha_de_alta)  + " |"

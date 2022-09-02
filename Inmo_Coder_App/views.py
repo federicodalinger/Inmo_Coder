@@ -1,21 +1,20 @@
 #<<<<<<< HEAD
 from django.shortcuts import render
 from .models import *
-from Inmo_Coder_App.forms import CocherasFormulario, ClientesFormulario
+# from Inmo_Coder_App.forms import CocherasFormulario, ClientesFormulario
 #=======
 from http.client import HTTPResponse
 from pickletools import read_unicodestring1
 from django.shortcuts import render, HttpResponse
 
-from Inmo_Coder_App.forms import Cargocasa,Deptocarga
-from Inmo_Coder_App.models import Casas,Departamentos
+from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario, ClientesFormulario
+# from Inmo_Coder_App.models import Casas,Departamentos
 #>>>>>>> fede-branch
 
 # Create your views here.
 
 def inicio (request):
     return render (request, "Inmo_Coder_App/inicio.html")
-
 
 ################# Views referida a CASAS: ################
 def casas_cargar (request):
@@ -30,30 +29,43 @@ def casas_cargar (request):
             v_telefono=info.get("contacto_telefono")
             v_email=info.get("contacto_email")
             v_fecha=info.get("fecha_alta")
-            print("Entro")
                         
             casa = Casas(ubicacion=v_ubicacion,ambientes=v_ambientes,precio=v_precio,contacto_nombre=v_contacto,contacto_telefono=v_telefono,contacto_email=v_email,fecha_de_alta=v_fecha)
             casa.save()
-            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":"Casa creada"})
+            miformulario=Cargocasa()
+            mensaje="Casa cargada"
+            return render(request,"Inmo_Coder_App/casas_cargar.html",{"miformulario":miformulario, "mensaje":mensaje})
         else:
-            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":"Error en la carga del form"})
+            miformulario=Cargocasa()
+            mensaje="Error al cargar"
+            return render(request,"Inmo_Coder_App/casas_cargar.html",{"miformulario":miformulario, "mensaje":mensaje})
     else:
         miformulario=Cargocasa()
-        print("hola")
-        return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/casas_cargar.html", {"miformulario":miformulario})
+        return render(request,"Inmo_Coder_App/casas_cargar.html", {"miformulario":miformulario})
 
-#############################################################################
+def casas_buscar(request):
+    if request.method == "POST":
+        respuesta=request.POST.get('ubicacion')
+        casas = Casas.objects.filter(ubicacion=respuesta)
+        titulo = {
+                "contacto_nombre":"Nombre", 
+                "contacto_telefono":"Teléfono",
+                "contacto_email":"E-mail",
+                "ambientes":"Ambientes",
+                "precio":"Precio", 
+                "ubicacion":"Ubicación",
+                "fecha_de_alta":"Fecha de inscripción"
+                }
+        
+        mensaje_alerta=""
+        if len(casas)==0:
+            titulo = {}
+            mensaje_alerta="Casa inexistente en la base de datos."
 
-def casas_buscar (request):
-    return render (request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html")
-
-def buscarcasa(request):
-    respuesta=request.GET.get('ubicacion')
-    casas = Casas.objects.filter(ubicacion=respuesta)
-    titulo="Ubicacion, Cantidad Ambientes, Precio, Nombre de Contacto, Telefono de Contacto, Email, Fecha de Alta"
-    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/casas_buscar.html",{"titulo":titulo,"ubicacion":casas})
-    #return HttpResponse(f"Casas con la ubicacion en: {respuesta}")
-
+        return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo,"casas":casas, "mensaje":mensaje_alerta})
+    else:
+        ocultar_contenido_inicial=True
+        return render (request, "Inmo_Coder_App/casas_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
 
 ################# Views referida a DEPARTAMENTOS: ################
 def departamentos_cargar (request):
@@ -72,26 +84,40 @@ def departamentos_cargar (request):
                         
             casa = Departamentos(ubicacion=v_ubicacion,ambientes=v_ambientes,precio=v_precio,contacto_nombre=v_contacto,contacto_telefono=v_telefono,contacto_email=v_email,fecha_de_alta=v_fecha)
             casa.save()
-            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":"Departamento Creado"})
+            miformulario=Deptocarga()
+            mensaje="Departamento cargado"
+            return render(request,"Inmo_Coder_App/departamentos_cargar.html",{"miformulario":miformulario, "mensaje":mensaje})
         else:
-            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":"Error en creacion de departamento"})
+            miformulario=Deptocarga()
+            mensaje="Error al cargar"
+            return render(request,"Inmo_Coder_App/departamentos_cargar.html",{"miformulario":miformulario, "mensaje":mensaje})
     else:
         miformulario=Deptocarga()
-        print("hola")
-        return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/departamentos_cargar.html", {"miformulario":miformulario})
+        return render(request,"Inmo_Coder_App/departamentos_cargar.html", {"miformulario":miformulario})
 
-################################################################
+def departamentos_buscar(request):
+    if request.method == "POST":
+        respuesta=request.POST.get('ubicacion')
+        deptos = Departamentos.objects.filter(ubicacion=respuesta)
+        titulo = {
+                "contacto_nombre":"Nombre", 
+                "contacto_telefono":"Teléfono",
+                "contacto_email":"E-mail",
+                "ambientes":"Ambientes",
+                "precio":"Precio", 
+                "ubicacion":"Ubicación",
+                "fecha_de_alta":"Fecha de inscripción"
+                }
 
-def departamentos_buscar (request):
-    return render (request, "Inmo_Coder_App/departamentos_buscar.html")
-
-def buscardepto(request):
-    respuesta=request.GET.get('ubicacion')
-    depto = Departamentos.objects.filter(ubicacion=respuesta)
-    #return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/resultado_deptos.html", {"ubicacion":depto})
-    titulo="Ubicacion, Cantidad Ambientes, Precio, Nombre de Contacto, Telefono de Contacto, Email, Fecha de Alta"
-    
-    return render(request, "Inmo_Coder_App/departamentos_buscar.html",{"titulo":titulo,"ubicacion":depto})
+        mensaje_alerta=""
+        if len(deptos)==0:
+            titulo = {}
+            mensaje_alerta="Departamento inexistente en la base de datos."
+        
+        return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"titulo":titulo,"deptos":deptos, "mensaje":mensaje_alerta})
+    else:
+        ocultar_contenido_inicial=True
+        return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
 
 ################# Views referida a COCHERAS: ################
 def cocheras_cargar (request):
@@ -104,26 +130,40 @@ def cocheras_cargar (request):
             informacion = form_cocheras.cleaned_data
             cochera = Cocheras(ubicacion=informacion['ubicacion'], precio=informacion['precio'], contacto_nombre=informacion['contacto_nombre'], contacto_telefono=informacion['contacto_telefono'], contacto_email=informacion['contacto_email'], fecha_de_alta=informacion['fecha_de_alta'])
             cochera.save()
-            return render (request, "Inmo_Coder_App/inicio.html", {"mensaje":"Cochera Cargada"})
+            form_cocheras = CocherasFormulario()
+            mensaje="Cochera cargada"
+            return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras, "mensaje":mensaje})
         else:
-            return render (request, "Inmo_Coder_App/inicio.html", {"mensaje":"Error al cargar"})
+            form_cocheras = CocherasFormulario()
+            mensaje="Error al cargar"
+            return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras, "mensaje":mensaje})
     
     else:
         form_cocheras = CocherasFormulario()
         return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras})
 
 def cocheras_buscar (request):
-    return render (request, "Inmo_Coder_App/cocheras_buscar.html")
+    if request.method == "POST":
+        ubi=request.POST.get("ubicacion")
+        cocheras=Cocheras.objects.filter(ubicacion=ubi)
+        titulo = {
+                "contacto_nombre":"Nombre", 
+                "contacto_telefono":"Teléfono",
+                "contacto_email":"E-mail",
+                "precio":"Precio", 
+                "ubicacion":"Ubicación",
+                "fecha_de_alta":"Fecha de inscripción"
+                }
 
-def buscarcocheras (request):
-    titulo = "Ubicación, Precio, Nombre, teléfono, E-mail"
-    ubi=request.GET.get("ubicacion")
-    cocheras=Cocheras.objects.filter(ubicacion=ubi)
-    return render(request, "Inmo_Coder_App/cocheras_buscar.html", {"ubicacion":cocheras, "titulo":titulo})
-    
+        mensaje_alerta=""
+        if len(cocheras)==0:
+            titulo = {}
+            mensaje_alerta="Cochera inexistente en la base de datos."
 
-
-
+        return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"cocheras":cocheras, "titulo":titulo, "mensaje":mensaje_alerta})
+    else:
+        ocultar_contenido_inicial=True
+        return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
 
 ################# Views referida a CLIENTES: ################
 def clientes_cargar (request):
@@ -135,22 +175,39 @@ def clientes_cargar (request):
             informacion = form_clientes.cleaned_data
             cliente = Clientes(motivo_descripcion=informacion['motivo_descripcion'], motivo_ubicacion=informacion['motivo_ubicacion'], motivo_precio=informacion['motivo_precio'], contacto_nombre=informacion['contacto_nombre'], contacto_telefono=informacion['contacto_telefono'], contacto_email=informacion['contacto_email'], fecha_de_alta=informacion['fecha_de_alta'])
             cliente.save()
-            return render (request, "Inmo_Coder_App/inicio.html", {"mensaje":"Cliente Cargado"})
+            form_clientes = ClientesFormulario()
+            mensaje="Cliente cargado"
+            return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes, "mensaje":mensaje})
         else:
-            return render (request, "Inmo_Coder_App/inicio.html", {"mensaje":"Error al cargar"})
+            form_clientes = ClientesFormulario()
+            mensaje="Error al cargar"
+            return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes, "mensaje":mensaje})
     
     else:
         form_clientes = ClientesFormulario()
         return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes})
 
 def clientes_buscar (request):
-    cabecera = "Busqueda de Clientes"
-    return render (request, "Inmo_Coder_App/clientes_buscar.html", {"busqueda_nombre":cabecera})
+    if request.method == "POST":
+        contacto=request.POST.get("contacto_nombre")
+        clientes=Clientes.objects.filter(contacto_nombre=contacto)
+        # titulo = "Nombre, teléfono, E-mail"
+        titulo = {
+                "contacto_nombre":"Nombre", 
+                "contacto_telefono":"Teléfono",
+                "contacto_email":"E-mail",
+                "motivo_descripcion":"Descripción de operación", 
+                "motivo_ubicacion":"Ubicación",
+                "fecha_de_alta":"Fecha de operación"
+                }                              
+                    
+        mensaje_alerta=""
+        if len(clientes)==0:
+            titulo = {}
+            mensaje_alerta="Cliente inexistente en la base de datos."
 
-def buscarclientes (request):
-    cabecera = "Resultado de Búsqueda de Clientes"
-    titulo = "Nombre, teléfono, E-mail"
-    contacto=request.GET.get("contacto_nombre")
-    cliente=Clientes.objects.filter(contacto_nombre=contacto)
-    return render(request, "Inmo_Coder_App/clientes_buscar.html", {"contacto_nombre":cliente, "busqueda_nombre":cabecera, "titulo":titulo})
+        return render (request, "Inmo_Coder_App/clientes_buscar.html", {"clientes":clientes, "titulo":titulo, "mensaje":mensaje_alerta})
+    else:
+        ocultar_contenido_inicial=True
+        return render (request, "Inmo_Coder_App/clientes_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
 
