@@ -12,8 +12,9 @@ from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario, Clien
 # from Inmo_Coder_App.models import Casas,Departamentos
 #>>>>>>> fede-branch
 
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import login, logout, authenticate
+from .forms import UserRegisterForm
 
 
 
@@ -243,3 +244,15 @@ def login_request(request):
         form = AuthenticationForm()
         #print("get")
         return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"form":form})
+
+def signin_request(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data["username"]
+            form.save()
+            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado"})
+
+    else:
+        form = UserRegisterForm()
+    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form})

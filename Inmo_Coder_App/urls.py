@@ -19,6 +19,7 @@ urlpatterns = [
     path("clientes_cargar/", clientes_cargar, name="clientes_cargar"),
 
     path("login/", login_request, name="login_request"),
+    path("signin/", signin_request, name="signin_request"),
 
 
 ]
