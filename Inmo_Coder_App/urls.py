@@ -1,6 +1,7 @@
+from re import template
 from django.urls import path
 from .views import *
-
+from django.contrib.auth.views import LogoutView
 # Aca vinculamos las urls con las views.
 
 urlpatterns = [
@@ -20,6 +21,6 @@ urlpatterns = [
 
     path("login/", login_request, name="login_request"),
     path("signin/", signin_request, name="signin_request"),
-
+    path("logout/", LogoutView.as_view(template_name="Inmo_Coder_App/templates/Inmo_Coder_App/logout.html"),name="logout")
 
 ]
