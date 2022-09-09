@@ -63,7 +63,16 @@
                 
                 <a class="btn btn-info" href="#integrantes">Integrantes</a>
 
-                <a class="btn btn-primary" href="http://127.0.0.1:8000/admin/">Administrador</a>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</a>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'login_request' %}">Signup</a></li>
+                        <li><a class="dropdown-item" href="{% url 'login_request' %}">Login </a></li>
+                        <li><a class="dropdown-item" href="{% url 'login_request' %}">Logout</a></li>
+                     
+                    </ul>
+                </div>
             </div>
         </nav>
 

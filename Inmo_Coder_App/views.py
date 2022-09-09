@@ -1,4 +1,5 @@
 #<<<<<<< HEAD
+from urllib import request
 from django.shortcuts import render
 from .models import *
 # from Inmo_Coder_App.forms import CocherasFormulario, ClientesFormulario
@@ -10,6 +11,13 @@ from django.shortcuts import render, HttpResponse
 from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario, ClientesFormulario
 # from Inmo_Coder_App.models import Casas,Departamentos
 #>>>>>>> fede-branch
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+
+
+
+
 
 # Create your views here.
 
@@ -211,3 +219,27 @@ def clientes_buscar (request):
         ocultar_contenido_inicial=True
         return render (request, "Inmo_Coder_App/clientes_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
 
+
+def login_request(request):
+    if request.method=="POST":
+        form = AuthenticationForm(request, data=request.POST)
+        print(form.error_messages)
+        if form.is_valid():
+            user = request.POST["username"]
+            clave = request.POST["password"]
+
+            usuario=authenticate(username=user, password=clave)
+            if usuario is not None:
+                login(request, usuario)
+                return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Bienvenido {usuario}"})
+                #print("OK")
+            else:
+                return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"mensaje":"Usuario o contraseña invalida"})
+                #print("usuario incorreto")
+        else:
+            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"mensaje":"Usuario o contraseña invalida"})
+            #print("formulario invalido")
+    else:
+        form = AuthenticationForm()
+        #print("get")
+        return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"form":form})
