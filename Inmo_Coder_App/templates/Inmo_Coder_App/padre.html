@@ -68,10 +68,23 @@
                   
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <li><a class="dropdown-item" href="{% url 'signin_request' %}">Signup</a></li>
+                        {% if not request.user.is_authenticated %}
                         <li><a class="dropdown-item" href="{% url 'login_request' %}">Login </a></li>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'editarperfil' %}">Editar Perfil </a></li>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                     
+                        {% endif %}
                     </ul>
+                </div>
+                <div class="text">
+                    {% block usuariologged %}  
+                        
+                    {% endblock %}
+                    
+                    
                 </div>
             </div>
         </nav>
@@ -83,7 +96,8 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            {% block titulo_de_pagina %} {% endblock %}
+                            <br>
+                            {% block titulo_de_pagina %} {% endblock %} 
                             <!-- Signup form-->
                             <!-- * * * * * * * * * * * * * * *-->
                             <!-- * * SB Forms Contact Form * *-->

@@ -1,19 +1,31 @@
 {% extends "Inmo_Coder_App/padre.html" %}
 
+
 {% load static %}
+
+{% block usuariologged %} 
+    {% if request.user.is_authenticated %}
+        Hola {{ user.username }} !!  <img src='{% static "{{ imagen }}" %}' alt="">
+        
+       <!-- <img src="/media/avatares/avatarfede_bLmtXQC.png" alt=""> -->
+    {% endif %}
+
+{% endblock %}
+
 
 {% block titulo_de_pagina %}
 
     <h1 class="mb-5">INMO. CODER<br>INICIO</h1>
+
     
 {% endblock %}
+
+
 
 {% block contenido_que_cambia %}
 
     <br>
     <h3> {{ mensaje }}</h3>
-
-
-
+    
 {% endblock %}
 

@@ -1,4 +1,5 @@
 #<<<<<<< HEAD
+from io import UnsupportedOperation
 from urllib import request
 from django.shortcuts import render
 from .models import *
@@ -14,8 +15,8 @@ from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario, Clien
 
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from .forms import UserRegisterForm
-
+from .forms import UserRegisterForm, UserEditForm
+#from django.template import loader, Template, Context
 
 
 
@@ -228,12 +229,20 @@ def login_request(request):
         if form.is_valid():
             user = request.POST["username"]
             clave = request.POST["password"]
-
             usuario=authenticate(username=user, password=clave)
+            
             if usuario is not None:
                 login(request, usuario)
-                return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Bienvenido {usuario}"})
-                #print("OK")
+                
+                lista=Avatar.objects.filter(user = request.user)
+                
+                if len(lista)!=0:
+                    imagen=lista[0].imagen.url
+                else:
+                    imagen=None
+                #print(imagen)
+                return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Bienvenido {usuario}","usuario": {usuario},"imagen": {imagen}})
+                
             else:
                 return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"mensaje":"Usuario o contraseña invalida"})
                 #print("usuario incorreto")
@@ -251,8 +260,29 @@ def signin_request(request):
         if form.is_valid():
             username=form.cleaned_data["username"]
             form.save()
+    
             return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado"})
 
     else:
         form = UserRegisterForm()
     return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form})
+
+#@login_required
+def editarperfil(request):
+    usuario=request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            #informacion = form.cleaned_data
+            usuario.email = form.cleaned_data["email"]
+            usuario.password1 = form.cleaned_data["password1"]
+            usuario.password2 = form.cleaned_data["password2"]
+            usuario.last_name = form.cleaned_data["last_name"]
+            usuario.first_name = form.cleaned_data["first_name"]
+            usuario.save()
+
+            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Perfil de {usuario} editado"})
+
+    else:
+        form = UserEditForm(instance=usuario)
+    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/editarperfil.html",{"usuario":usuario,"form":form})

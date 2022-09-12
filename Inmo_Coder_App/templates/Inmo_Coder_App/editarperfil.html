@@ -11,9 +11,9 @@
 
 {% block titulo_de_pagina %}
 
-    <h1 class="mb-5">Registro de Usuarios</h1>
+    <h1 class="mb-5">Editar Perfil de <br></h1>
+    <h1> {{ usuario }}</h1>
  
-
 {% endblock %}
 
 {% block contenido_que_cambia %}
@@ -27,13 +27,13 @@
     {% else %}
         
             
-        <form action="" method="POST">
+        <form action="{ editarperfil }" method="POST">
             {% csrf_token %}
             <br>
 
             {{form.as_p}}
 
-            <button type="submit">Registrar</button>
+            <button type="submit">Guardas Cambios</button>
 
         </form>
 

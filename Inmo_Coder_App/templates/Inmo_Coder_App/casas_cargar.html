@@ -2,6 +2,13 @@
 
 {% load static %}
 
+{% block usuariologged %} 
+    {% if request.user.is_authenticated %}
+        Hola {{ user.username }} !!
+    {% endif %}
+
+{% endblock %}
+
 {% block titulo_de_pagina %}
 
     <h1 class="mb-5">CARGAR<br>CASAS </h1>
