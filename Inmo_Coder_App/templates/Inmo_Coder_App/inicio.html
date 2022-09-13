@@ -5,9 +5,9 @@
 
 {% block usuariologged %} 
     {% if request.user.is_authenticated %}
-        Hola {{ user.username }} !!  <img src='{% static "{{ imagen }}" %}' alt="">
-        
-       <!-- <img src="/media/avatares/avatarfede_bLmtXQC.png" alt=""> -->
+        Hola {{ user.username }} !!  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+       
+       
     {% endif %}
 
 {% endblock %}
