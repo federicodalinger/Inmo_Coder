@@ -22,5 +22,6 @@ urlpatterns = [
     path("login/", login_request, name="login_request"),
     path("signin/", signin_request, name="signin_request"),
     path("logout/", LogoutView.as_view(template_name="Inmo_Coder_App/templates/Inmo_Coder_App/logout.html"),name="logout"),
-   path("editarperfil/", editarperfil, name="editarperfil"),
+    path("editarperfil/", editarperfil, name="editarperfil"),
+    path("cargaravatar/", cargaravatar, name="cargaravatar"),
 ]

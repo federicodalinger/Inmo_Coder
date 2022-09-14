@@ -1,0 +1,43 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block usuariologged %} 
+    {% if request.user.is_authenticated %}
+    Hola {{ user.username }} !!  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+    {% endif %}
+
+{% endblock %}
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">Carga de Avatar de <br></h1>
+    <h1> {{ usuario }}</h1>
+ 
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+
+    {% if mensaje %}
+   
+        <h8>{{ mensaje }}</h8>
+        <br>
+   
+    {% else %}
+        
+            
+        <form action="{% url 'cargaravatar' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <br>
+
+            {{miformulario.as_p}}
+
+            <button type="submit">Cargar</button>
+
+        </form>
+
+   {% endif %}
+
+{% endblock %}
+
