@@ -1,0 +1,41 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">LISTAR<br>BLOGS</h1>
+   
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+    {% if mensaje %}
+        <br>
+        <h2>{{ mensaje }}</h2>
+
+    {% else %}
+
+        <br>
+        {% for blog in blogs %}
+        
+            <li class="px-3 py-1">
+                Blog: {{ blog.titulo }} - {{ blog.sub_titulo }} | Autor: {{ blog.autor }} - Fecha: {{ blog.fecha_creacion }}
+
+                <div class="btn-group px-1" role="group" aria-label="Basic example" >
+                    <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'blog_ver' blog.id %}">LEER MAS</a>
+                    <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'blog_eliminar' blog.id %}">ELIMINAR</a>
+                    <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'blog_editar' blog.id %}">EDITAR</a>
+                </div>
+            </li>
+
+        {% endfor %}
+
+    {% endif %}
+    <br>
+    <div style="display: flex; justify-content: center">
+        <a class="btn btn-warning" href="{% url 'blog_crear' %}" >Nuevo Blog</a>
+    </div>
+
+{% endblock %}

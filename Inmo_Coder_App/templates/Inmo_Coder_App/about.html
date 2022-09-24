@@ -1,0 +1,101 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">INMO. CODER<br>ACERCA DE MI</h1>
+    
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+        <!-- Icons Grid-->
+        <section class="features-icons bg-light text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
+                            <h3>Idea de Inmo. Coder</h3>
+                            <p class="lead mb-0">Mediante este sitio podemos hacer una carga y busqueda de inmuebles y clientes.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3" >
+                            <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
+                            <h3>Hecho en Python</h3>
+                            <p class="lead mb-0">Con motivo de proyecto de fin de curso, este sitio esta basado en python.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                            <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
+                            <h3>Integra Django</h3>
+                            <p class="lead mb-0">Vinculamos este web framework para interactuar con html, python y base de datos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Showcases-->
+        <section class="showcase">
+            <div class="container-fluid p-0">
+                <div class="row g-0">
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/static/Inmo_Coder_App/assets/img/bg-showcase-1.jpg')"></div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                        <h2>Idea de Inmo. Coder</h2>
+                        <p class="lead mb-0">Este sitio web permite la carga y busqueda de casas, departamentos, cocheras y clientes utilizando base de datos. Mediante los botones en la parte superior se puede concretar dichas acciones.</p>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col-lg-6 text-white showcase-img" style="background-image: url('/static/Inmo_Coder_App/assets/img/bg-showcase-2.jpg')"></div>
+                    <div class="col-lg-6 my-auto showcase-text">
+                        <h2>Hecho en Python</h2>
+                        <p class="lead mb-0">Esta es la entrega del proyecto final del curso de Python, dictado por Coderhouse. La idea es aplicar todo lo visto para generar este sitio web, incluyendo funciones, clases, condicionales, bucles, diccionarios, etc. Para mas info: https://www.coderhouse.com/online/python</p>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('/static/Inmo_Coder_App/assets/img/bg-showcase-3.jpg')"></div>
+                    <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                        <h2>Integra Django</h2>
+                        <p class="lead mb-0">La totalidad de proyecto se basa en este web framework, en donde los sitios son regenerados tomando las bases de un html "padre" y la visualización de informacion se logra por código "jinja" (encargado de vincular Python con Html.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonials-->
+        <section class="testimonials text-center bg-light" id="integrantes">
+            <div class="container">
+                <h2 class="mb-5">Integrantes del Proyecto "Inmo. Coder":</h2>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="/static/Inmo_Coder_App/assets/img/testimonials-1.jpg" alt="..." />
+                            <h5>Federico La Volpe</h5>
+                            <!-- <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="/static/Inmo_Coder_App/assets/img/testimonials-2.jpg" alt="..." />
+                            <h5>Federico Walter Dalinger</h5>
+                            <!-- <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid rounded-circle mb-3" src="/static/Inmo_Coder_App/assets/img/testimonials-3.jpg" alt="..." />
+                            <h5>Felipe Goicoechea</h5>
+                            <!-- <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+{% endblock %}
+

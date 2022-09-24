@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -60,3 +61,15 @@ class Clientes (models.Model):
     def __str__(self):
         #ESTO ES COMO VOY A VER MI BASE DE DATOS EN "ADMIN":
         return "Contacto -> Nombre: " + self.contacto_nombre + ", Teléfono: " + str(self.contacto_telefono) + ", E-mail: " + self.contacto_email + "Motivo -> Detalle: " + self.motivo_descripcion + ", Ubicación: " + self.motivo_ubicacion + ", Precio: " + str(self.motivo_precio) + " | Fecha de publicación: " + str(self.fecha_de_alta)  + " |"
+
+class Blog (models.Model): # El .Models es para que herede el "models"
+    titulo = models.CharField(max_length=50)
+    sub_titulo = models.CharField(max_length=50)
+    cuerpo_texto = RichTextField(blank=True, null=True)
+    # cuerpo_texto = models.CharField(max_length=200)
+    autor = models.CharField(max_length=50) 
+    fecha_creacion = models.DateField() 
+    imagen = models.ImageField(upload_to="imagenes", null=True, blank=True)
+
+    def __str__(self):
+        return "Título: " + self.titulo + " | Autor: " + str(self.autor) + " | Fecha creacion: " + str(self.fecha_creacion) + " |"

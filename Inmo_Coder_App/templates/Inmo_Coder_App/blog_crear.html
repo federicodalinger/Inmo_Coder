@@ -1,0 +1,47 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">CREAR<br>BLOG</h1>
+   
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+<br>
+
+<div class="container">
+    <div class="abs-center">
+    
+        <form action="{% url 'blog_crear' %}" method="POST" enctype="multipart/form-data" class="border p-3 form"> {% csrf_token %}
+
+            <div class="abs-center">               
+                <table>
+                    {{ miformulario.media }}
+                    {{ miformulario.as_table }}
+                </table>
+            </div>
+
+            <br>
+
+            <div class="abs-center">
+                <input  type="submit", value="Crear Blog" class="btn btn-primary">
+            </div>
+                
+        </form>
+        
+    </div>
+
+    <br>
+
+    <div class="abs-center">
+        <h3> {{ mensaje }}</h3>
+    </div>
+
+</div>
+
+{% endblock %}
+

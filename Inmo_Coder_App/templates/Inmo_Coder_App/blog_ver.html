@@ -1,0 +1,44 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">VER<br>BLOG</h1>
+   
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+{% if mensaje %}
+    <br>
+    <h2>{{ mensaje }}</h2>
+
+{% else %}
+
+    <br>
+    <div class="container">
+        <div class="abs-center">
+            <h1>{{ blog.titulo }}</h1>
+        </div>
+        <div class="abs-center">
+            <h2>{{ blog.sub_titulo }}</h2>
+        </div>
+        <br>
+        <div class="abs-center">
+            <h6>{{ blog.cuerpo_texto | safe }}</h6>
+        </div>
+        <div class="abs-center">
+            <h6>{{ blog.imagen }}</h6>
+        </div>
+        <div style="display: flex; justify-content: space-around">
+            <h6>Autor: {{ blog.autor }}</h6> 
+            <h6>Fecha de creación: {{ blog.fecha_creacion }}</h6>
+        </div>
+    </div>
+    
+{% endif %}
+
+{% endblock %}
+
