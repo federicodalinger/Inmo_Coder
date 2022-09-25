@@ -30,5 +30,11 @@ urlpatterns = [
     path("departamentos/editar/<pk>", DepartamentosUpdate.as_view(), name='departamentos_editar'),
     path("departamentos/borrar/<pk>", DepartamentosDelete.as_view(), name='departamentos_borrar'),
 
+    path("cocheras/list/", CocherasList.as_view(), name="cocheras_listar"),
+    #path("casas/<pk>", CasasDetalle.as_view(), name="casas_detalle"),
+    path("cocheras/nuevo/", CocherasCreacion.as_view(), name='cocheras_crear'),
+    path("cocheras/editar/<pk>", CocherasUpdate.as_view(), name='cocheras_editar'),
+    path("cocheras/borrar/<pk>", CocherasDelete.as_view(), name='cocheras_borrar'),
+
 
 ]

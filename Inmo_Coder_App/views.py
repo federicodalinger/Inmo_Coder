@@ -254,3 +254,22 @@ class DepartamentosUpdate(UpdateView):
 class DepartamentosDelete(DeleteView):
     model = Departamentos
     success_url = reverse_lazy('departamentos_listar')
+
+
+class CocherasList(ListView):
+    model=Cocheras
+    template_name="Inmo_Coder_App/leerCocheras.html"
+
+class CocherasCreacion(CreateView):
+    model = Cocheras
+    success_url = reverse_lazy('cocheras_listar')
+    fields=['ubicacion', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class CocherasUpdate(UpdateView):
+    model = Cocheras
+    success_url = reverse_lazy('cocheras_listar')
+    fields=['ubicacion', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class CocherasDelete(DeleteView):
+    model = Cocheras
+    success_url = reverse_lazy('cocheras_listar')
