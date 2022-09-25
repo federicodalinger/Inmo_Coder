@@ -25,16 +25,19 @@ urlpatterns = [
     path("casas/borrar/<pk>", CasasDelete.as_view(), name='casas_borrar'),
 
     path("departamentos/list/", DepartamentosList.as_view(), name="departamentos_listar"),
-    #path("casas/<pk>", CasasDetalle.as_view(), name="casas_detalle"),
     path("departamentos/nuevo/", DepartamentosCreacion.as_view(), name='departamentos_crear'),
     path("departamentos/editar/<pk>", DepartamentosUpdate.as_view(), name='departamentos_editar'),
     path("departamentos/borrar/<pk>", DepartamentosDelete.as_view(), name='departamentos_borrar'),
 
     path("cocheras/list/", CocherasList.as_view(), name="cocheras_listar"),
-    #path("casas/<pk>", CasasDetalle.as_view(), name="casas_detalle"),
     path("cocheras/nuevo/", CocherasCreacion.as_view(), name='cocheras_crear'),
     path("cocheras/editar/<pk>", CocherasUpdate.as_view(), name='cocheras_editar'),
     path("cocheras/borrar/<pk>", CocherasDelete.as_view(), name='cocheras_borrar'),
+
+    path("clientes/list/", ClientesList.as_view(), name="clientes_listar"),
+    path("clientes/nuevo/", ClientesCreacion.as_view(), name='clientes_crear'),
+    path("clientes/editar/<pk>", ClientesUpdate.as_view(), name='clientes_editar'),
+    path("clientes/borrar/<pk>", ClientesDelete.as_view(), name='clientes_borrar'),
 
 
 ]
