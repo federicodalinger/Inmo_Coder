@@ -1,0 +1,22 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+<h1 class="mb-5">Listado de Departamentos!</h1>
+    {% endblock %}
+
+
+    {% block contenido_que_cambia %}
+    
+    <h1>Listado de Departamentos</h1>
+
+    {% for departamento in object_list %}
+
+        <li>{{ departamento }}</li>
+
+    {% endfor %}
+
+
+    {% endblock %}

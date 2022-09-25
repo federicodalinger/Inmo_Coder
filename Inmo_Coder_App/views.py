@@ -236,3 +236,21 @@ class CasasUpdate(UpdateView):
 class CasasDelete(DeleteView):
     model = Casas
     success_url = reverse_lazy('casas_listar')
+
+class DepartamentosList(ListView):
+    model=Departamentos
+    template_name="Inmo_Coder_App/leerDepartamentos.html"
+
+class DepartamentosCreacion(CreateView):
+    model = Departamentos
+    success_url = reverse_lazy('departamentos_listar')
+    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class DepartamentosUpdate(UpdateView):
+    model = Departamentos
+    success_url = reverse_lazy('departamentos_listar')
+    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class DepartamentosDelete(DeleteView):
+    model = Departamentos
+    success_url = reverse_lazy('departamentos_listar')
