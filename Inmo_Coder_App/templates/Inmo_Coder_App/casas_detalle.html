@@ -1,0 +1,21 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+<h1 class="mb-5">Listado de Casas!</h1>
+    {% endblock %}
+
+
+    {% block contenido_que_cambia %}
+    
+    <p>UBICACION : <i>{{Casas.ubicacion}</i></p>
+    <p>PRECIO : <i>{{Casas.precio}}</i></p>
+    <p>NOMBRE CONTACTO : <i>{{Casas.contacto_nombre}}</i></p>
+
+
+    {% endblock %}
+    {% block scripts %}
+
+    {% endblock %}

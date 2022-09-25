@@ -18,5 +18,12 @@ urlpatterns = [
     path("clientes_buscar/", clientes_buscar, name="clientes_buscar"),
     path("clientes_cargar/", clientes_cargar, name="clientes_cargar"),
 
+    path("casas/list/", CasasList.as_view(), name="casas_listar"),
+    #path("casas/<pk>", CasasDetalle.as_view(), name="casas_detalle"),
+    path("casas/nuevo/", CasasCreacion.as_view(), name='casas_crear'),
+    path("casas/editar/<pk>", CasasUpdate.as_view(), name='casas_editar'),
+    path("casas/borrar/<pk>", CasasDelete.as_view(), name='casas_borrar'),
+
+
 
 ]

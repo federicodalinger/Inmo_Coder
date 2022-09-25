@@ -1,11 +1,11 @@
-#<<<<<<< HEAD
 from django.shortcuts import render
 from .models import *
-# from Inmo_Coder_App.forms import CocherasFormulario, ClientesFormulario
-#=======
 from http.client import HTTPResponse
 from pickletools import read_unicodestring1
 from django.shortcuts import render, HttpResponse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+
 
 from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario, ClientesFormulario
 # from Inmo_Coder_App.models import Casas,Departamentos
@@ -211,3 +211,28 @@ def clientes_buscar (request):
         ocultar_contenido_inicial=True
         return render (request, "Inmo_Coder_App/clientes_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
 
+
+###PARA CLASES BASADAS EN VISTAS
+
+class CasasList(ListView):
+    model=Casas
+    template_name="Inmo_Coder_App/leerCasas.html"
+
+
+'''class CasasDetalle(DetailView):
+    model=Casas
+    template_name="Inmo_Coder_App/casas_detalle.html"'''
+
+class CasasCreacion(CreateView):
+    model = Casas
+    success_url = reverse_lazy('casas_listar')
+    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class CasasUpdate(UpdateView):
+    model = Casas
+    success_url = reverse_lazy('casas_listar')
+    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class CasasDelete(DeleteView):
+    model = Casas
+    success_url = reverse_lazy('casas_listar')
