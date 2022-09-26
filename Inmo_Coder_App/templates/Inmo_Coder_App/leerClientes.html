@@ -14,8 +14,7 @@
 
     {% for cliente in object_list %}
 
-        <li>{{ cliente }}</li>
-
+    <li>Nombre: {{ cliente.contacto_nombre }} | Telefono: {{ cliente.contacto_telefono}} | Email: {{ cliente.contacto_email }}</li>
         <button>
             <a href="{% url 'clientes_borrar' cliente.id %}">ELIMINAR</a>
             <a href="{% url 'clientes_editar' cliente.id %}">Editar</a>

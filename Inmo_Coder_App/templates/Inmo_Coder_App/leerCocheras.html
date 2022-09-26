@@ -14,7 +14,7 @@
 
     {% for cochera in object_list %}
 
-        <li>{{ cochera }}</li>
+    <li>Ubicación: {{ cochera.ubicacion }} | Precio: {{ cochera.precio }} | Nombre de contacto: {{ cochera.contacto_nombre }}</li>
 
         <button>
             <a href="{% url 'cocheras_borrar' cochera.id %}">ELIMINAR</a>

@@ -14,8 +14,8 @@
 
     {% for casa in object_list %}
 
-        <li>{{ casa }}</li>
-
+        <li>Ubicación: {{ casa.ubicacion }} | Precio: {{ casa.precio }} | Nombre de contacto: {{ casa.contacto_nombre }}</li> 
+        
         <button>
             <a href="{% url 'casas_borrar' casa.id %}">ELIMINAR</a>
             <a href="{% url 'casas_editar' casa.id %}">Editar</a>
