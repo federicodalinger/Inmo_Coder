@@ -3,7 +3,8 @@ from .models import *
 from http.client import HTTPResponse
 from pickletools import read_unicodestring1
 from django.shortcuts import render, HttpResponse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import permission_required
 
@@ -18,7 +19,7 @@ def inicio (request):
     return render (request, "Inmo_Coder_App/inicio.html")
 
 ################# Views referida a CASAS: ################
-@permission_required("admin.create_post", login_url="/", raise_exception=True)
+#DEJO TIPEADO EL PERMISO DE ADMIN EN CASO QUE SEA NECESARIO @permission_required("admin.create_post", login_url="/", raise_exception=True)
 def casas_cargar (request):
     if request.method == "POST":
         miformulario = Cargocasa(request.POST)
@@ -221,9 +222,9 @@ class CasasList(ListView):
     template_name="Inmo_Coder_App/leerCasas.html"
 
 
-'''class CasasDetalle(DetailView):
+class CasasDetalle(DetailView):
     model=Casas
-    template_name="Inmo_Coder_App/casas_detalle.html"'''
+    template_name="Inmo_Coder_App/casas_detalle.html"
 
 class CasasCreacion(CreateView):
     model = Casas
