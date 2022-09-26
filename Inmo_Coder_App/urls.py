@@ -19,23 +19,26 @@ urlpatterns = [
     path("clientes_cargar/", clientes_cargar, name="clientes_cargar"),
 
     path("casas/list/", CasasList.as_view(), name="casas_listar"),
-    #path("casas/<pk>", CasasDetalle.as_view(), name="casas_detalle"),
+    path("casas/<pk>", CasasDetalle.as_view(), name="casas_detalle"),
     path("casas/nuevo/", CasasCreacion.as_view(), name='casas_crear'),
     path("casas/editar/<pk>", CasasUpdate.as_view(), name='casas_editar'),
     #path(r"^editar/(?P<id_casas>\d+)$", CasasUpdate.as_view(), name='casas_editar'),
     path("casas/borrar/<pk>", CasasDelete.as_view(), name='casas_borrar'),
 
     path("departamentos/list/", DepartamentosList.as_view(), name="departamentos_listar"),
+    path("departamentos/<pk>", DepartamentosDetalle.as_view(), name="departamentos_detalle"),
     path("departamentos/nuevo/", DepartamentosCreacion.as_view(), name='departamentos_crear'),
     path("departamentos/editar/<pk>", DepartamentosUpdate.as_view(), name='departamentos_editar'),
     path("departamentos/borrar/<pk>", DepartamentosDelete.as_view(), name='departamentos_borrar'),
 
     path("cocheras/list/", CocherasList.as_view(), name="cocheras_listar"),
+    path("cocheras/<pk>", CocherasDetalle.as_view(), name="cocheras_detalle"),
     path("cocheras/nuevo/", CocherasCreacion.as_view(), name='cocheras_crear'),
     path("cocheras/editar/<pk>", CocherasUpdate.as_view(), name='cocheras_editar'),
     path("cocheras/borrar/<pk>", CocherasDelete.as_view(), name='cocheras_borrar'),
 
     path("clientes/list/", ClientesList.as_view(), name="clientes_listar"),
+    path("clientes/<pk>", ClientesDetalle.as_view(), name="clientes_detalle"),
     path("clientes/nuevo/", ClientesCreacion.as_view(), name='clientes_crear'),
     path("clientes/editar/<pk>", ClientesUpdate.as_view(), name='clientes_editar'),
     path("clientes/borrar/<pk>", ClientesDelete.as_view(), name='clientes_borrar'),

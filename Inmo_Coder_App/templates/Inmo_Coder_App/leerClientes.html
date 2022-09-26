@@ -16,6 +16,12 @@
 
         <li>{{ cliente }}</li>
 
+        <button>
+            <a href="{% url 'clientes_borrar' cliente.id %}">ELIMINAR</a>
+            <a href="{% url 'clientes_editar' cliente.id %}">Editar</a>
+            <a href="{% url 'clientes_detalle' cliente.id %}">Ver detalles</a>
+        </button>
+
     {% endfor %}
 
 

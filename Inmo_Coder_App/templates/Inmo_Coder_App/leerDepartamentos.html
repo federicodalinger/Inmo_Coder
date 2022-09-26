@@ -16,6 +16,12 @@
 
         <li>{{ departamento }}</li>
 
+        <button>
+            <a href="{% url 'departamentos_borrar' departamento.id %}">ELIMINAR</a>
+            <a href="{% url 'departamentos_editar' departamento.id %}">Editar</a>
+            <a href="{% url 'departamentos_detalle' departamento.id %}">Ver detalles</a>
+        </button>
+
     {% endfor %}
 
 

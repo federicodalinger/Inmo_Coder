@@ -16,6 +16,12 @@
 
         <li>{{ casa }}</li>
 
+        <button>
+            <a href="{% url 'casas_borrar' casa.id %}">ELIMINAR</a>
+            <a href="{% url 'casas_editar' casa.id %}">Editar</a>
+            <a href="{% url 'casas_detalle' casa.id %}">Ver detalles</a>
+        </button>
+
     {% endfor %}
 
 

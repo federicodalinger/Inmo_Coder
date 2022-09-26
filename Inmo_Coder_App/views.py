@@ -244,6 +244,10 @@ class DepartamentosList(ListView):
     model=Departamentos
     template_name="Inmo_Coder_App/leerDepartamentos.html"
 
+class DepartamentosDetalle(DetailView):
+    model=Departamentos
+    template_name="Inmo_Coder_App/departamentos_detalle.html"
+
 class DepartamentosCreacion(CreateView):
     model = Departamentos
     success_url = reverse_lazy('departamentos_listar')
@@ -263,6 +267,10 @@ class CocherasList(ListView):
     model=Cocheras
     template_name="Inmo_Coder_App/leerCocheras.html"
 
+class CocherasDetalle(DetailView):
+    model=Cocheras
+    template_name="Inmo_Coder_App/cocheras_detalle.html"
+
 class CocherasCreacion(CreateView):
     model = Cocheras
     success_url = reverse_lazy('cocheras_listar')
@@ -280,6 +288,10 @@ class CocherasDelete(DeleteView):
 class ClientesList(ListView):
     model=Clientes
     template_name="Inmo_Coder_App/leerClientes.html"
+
+class ClientesDetalle(DetailView):
+    model=Clientes
+    template_name="Inmo_Coder_App/clientes_detalle.html"
 
 class ClientesCreacion(CreateView):
     model = Clientes

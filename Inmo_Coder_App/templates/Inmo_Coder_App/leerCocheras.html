@@ -16,6 +16,12 @@
 
         <li>{{ cochera }}</li>
 
+        <button>
+            <a href="{% url 'cocheras_borrar' cochera.id %}">ELIMINAR</a>
+            <a href="{% url 'cocheras_editar' cochera.id %}">Editar</a>
+            <a href="{% url 'cocheras_detalle' cochera.id %}">Ver detalles</a>
+        </button>
+
     {% endfor %}
 
 

@@ -1,0 +1,21 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+<h1 class="mb-5">Detalle de {{ object.contacto_nombre }}</h1>
+    {% endblock %}
+
+
+    {% block contenido_que_cambia %}
+    
+    <p>NOMBRE : <i>{{object.contacto_nombre}}</i></p>
+    <p>TELEFONO : <i>{{object.contacto_telefono}}</i></p>
+    <p>EMAIL : <i>{{object.contacto_email}}</i></p>
+
+
+    {% endblock %}
+    {% block scripts %}
+
+    {% endblock %}
