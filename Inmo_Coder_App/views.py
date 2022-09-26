@@ -24,8 +24,10 @@ from .forms import AvatarForm, UserRegisterForm, UserEditForm
 # Create your views here.
 
 def inicio (request):
-
-    return render (request, "Inmo_Coder_App/inicio.html",{"imagen":loadavatar(request)})
+    if request.user is not None:
+        return render (request, "Inmo_Coder_App/inicio.html",{"imagen":loadavatar(request)})
+    else:
+        return render (request, "Inmo_Coder_App/inicio.html")
 
 ################# Views referida a CASAS: ################
 def casas_cargar (request):
