@@ -1,0 +1,20 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+<h1 class="mb-5">Detalle de Casa en {{ object.ubicacion }}</h1>
+    {% endblock %}
+
+
+    {% block contenido_que_cambia %}
+
+    <h5>{{ object }}</h5>
+    
+
+
+    {% endblock %}
+    {% block scripts %}
+
+    {% endblock %}

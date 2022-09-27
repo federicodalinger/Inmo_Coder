@@ -1,0 +1,28 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+<h1 class="mb-5">Listado de Cocheras!</h1>
+    {% endblock %}
+
+
+    {% block contenido_que_cambia %}
+    
+    <h1>Listado de Cocheras</h1>
+
+    {% for cochera in object_list %}
+
+    <li>Ubicación: {{ cochera.ubicacion }} | Precio: {{ cochera.precio }} | Nombre de contacto: {{ cochera.contacto_nombre }}</li>
+
+        <button>
+            <a href="{% url 'cocheras_borrar' cochera.id %}">ELIMINAR</a>
+            <a href="{% url 'cocheras_editar' cochera.id %}">Editar</a>
+            <a href="{% url 'cocheras_detalle' cochera.id %}">Ver detalles</a>
+        </button>
+
+    {% endfor %}
+
+
+    {% endblock %}

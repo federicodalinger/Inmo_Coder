@@ -1,0 +1,27 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+<h1 class="mb-5">Listado de Clientes!</h1>
+    {% endblock %}
+
+
+    {% block contenido_que_cambia %}
+    
+    <h1>Listado de Clientes</h1>
+
+    {% for cliente in object_list %}
+
+    <li>Nombre: {{ cliente.contacto_nombre }} | Telefono: {{ cliente.contacto_telefono}} | Email: {{ cliente.contacto_email }}</li>
+        <button>
+            <a href="{% url 'clientes_borrar' cliente.id %}">ELIMINAR</a>
+            <a href="{% url 'clientes_editar' cliente.id %}">Editar</a>
+            <a href="{% url 'clientes_detalle' cliente.id %}">Ver detalles</a>
+        </button>
+
+    {% endfor %}
+
+
+    {% endblock %}

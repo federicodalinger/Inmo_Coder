@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path
 
 from django.urls import include
+from Inmo_Coder_App import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("Inmo_Coder_App/", include("Inmo_Coder_App.urls")),
+    path("", views.inicio),
+
 ]

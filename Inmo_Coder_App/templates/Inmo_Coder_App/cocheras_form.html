@@ -1,0 +1,21 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+<h1 class="mb-5">CREACIÓN DE COCHERAS</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h1>FORMULARIO DE COCHERAS</h1>
+
+<form method="POST"> {% csrf_token %} 
+
+    {{  form.as_p}}
+
+<input type="submit" value="Guardar">
+
+</form>
+
+{% endblock %}
+

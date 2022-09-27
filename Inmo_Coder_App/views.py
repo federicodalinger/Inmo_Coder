@@ -1,11 +1,13 @@
-#<<<<<<< HEAD
 from django.shortcuts import render
 from .models import *
-# from Inmo_Coder_App.forms import CocherasFormulario, ClientesFormulario
-#=======
 from http.client import HTTPResponse
 from pickletools import read_unicodestring1
 from django.shortcuts import render, HttpResponse
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import permission_required
+
 
 from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario, ClientesFormulario
 # from Inmo_Coder_App.models import Casas,Departamentos
@@ -17,6 +19,7 @@ def inicio (request):
     return render (request, "Inmo_Coder_App/inicio.html")
 
 ################# Views referida a CASAS: ################
+#DEJO TIPEADO EL PERMISO DE ADMIN EN CASO QUE SEA NECESARIO @permission_required("admin.create_post", login_url="/", raise_exception=True)
 def casas_cargar (request):
     if request.method == "POST":
         miformulario = Cargocasa(request.POST)
@@ -211,3 +214,95 @@ def clientes_buscar (request):
         ocultar_contenido_inicial=True
         return render (request, "Inmo_Coder_App/clientes_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
 
+
+###PARA CLASES BASADAS EN VISTAS
+
+class CasasList(ListView):
+    model=Casas
+    template_name="Inmo_Coder_App/leerCasas.html"
+
+
+class CasasDetalle(DetailView):
+    model=Casas
+    template_name="Inmo_Coder_App/casas_detalle.html"
+
+class CasasCreacion(CreateView):
+    model = Casas
+    success_url = reverse_lazy('casas_listar')
+    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class CasasUpdate(UpdateView):
+    model = Casas
+    success_url = reverse_lazy('casas_listar')
+    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class CasasDelete(DeleteView):
+    model = Casas
+    success_url = reverse_lazy('casas_listar')
+
+class DepartamentosList(ListView):
+    model=Departamentos
+    template_name="Inmo_Coder_App/leerDepartamentos.html"
+
+class DepartamentosDetalle(DetailView):
+    model=Departamentos
+    template_name="Inmo_Coder_App/departamentos_detalle.html"
+
+class DepartamentosCreacion(CreateView):
+    model = Departamentos
+    success_url = reverse_lazy('departamentos_listar')
+    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class DepartamentosUpdate(UpdateView):
+    model = Departamentos
+    success_url = reverse_lazy('departamentos_listar')
+    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class DepartamentosDelete(DeleteView):
+    model = Departamentos
+    success_url = reverse_lazy('departamentos_listar')
+
+
+class CocherasList(ListView):
+    model=Cocheras
+    template_name="Inmo_Coder_App/leerCocheras.html"
+
+class CocherasDetalle(DetailView):
+    model=Cocheras
+    template_name="Inmo_Coder_App/cocheras_detalle.html"
+
+class CocherasCreacion(CreateView):
+    model = Cocheras
+    success_url = reverse_lazy('cocheras_listar')
+    fields=['ubicacion', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class CocherasUpdate(UpdateView):
+    model = Cocheras
+    success_url = reverse_lazy('cocheras_listar')
+    fields=['ubicacion', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class CocherasDelete(DeleteView):
+    model = Cocheras
+    success_url = reverse_lazy('cocheras_listar')
+
+class ClientesList(ListView):
+    model=Clientes
+    template_name="Inmo_Coder_App/leerClientes.html"
+
+class ClientesDetalle(DetailView):
+    model=Clientes
+    template_name="Inmo_Coder_App/clientes_detalle.html"
+
+class ClientesCreacion(CreateView):
+    model = Clientes
+    success_url = reverse_lazy('clientes_listar')
+    fields=['motivo_descripcion', 'motivo_ubicacion', 'motivo_precio','contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class ClientesUpdate(UpdateView):
+    model = Clientes
+    success_url = reverse_lazy('clientes_listar')
+    fields=['motivo_descripcion', 'motivo_ubicacion', 'motivo_precio','contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+
+class ClientesDelete(DeleteView):
+    model = Clientes
+    success_url = reverse_lazy('clientes_listar')

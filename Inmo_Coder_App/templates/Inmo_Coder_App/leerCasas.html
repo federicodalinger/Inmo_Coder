@@ -1,0 +1,28 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block titulo_de_pagina %}
+
+<h1 class="mb-5">Listado de Casas!</h1>
+    {% endblock %}
+
+
+    {% block contenido_que_cambia %}
+    
+    <h1>Listado de Casas</h1>
+
+    {% for casa in object_list %}
+
+        <li>Ubicación: {{ casa.ubicacion }} | Precio: {{ casa.precio }} | Nombre de contacto: {{ casa.contacto_nombre }}</li> 
+        
+        <button>
+            <a href="{% url 'casas_borrar' casa.id %}">ELIMINAR</a>
+            <a href="{% url 'casas_editar' casa.id %}">Editar</a>
+            <a href="{% url 'casas_detalle' casa.id %}">Ver detalles</a>
+        </button>
+
+    {% endfor %}
+
+
+    {% endblock %}
