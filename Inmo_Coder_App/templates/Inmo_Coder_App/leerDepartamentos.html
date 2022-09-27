@@ -37,6 +37,11 @@
     <h2>No hay departamentos en la base de datos.</h2>
 
     {% endif %}
-<br>
+
+    <br>
+    <div style="display: flex; justify-content: center">
+        <a class="btn btn-warning" href="{% url 'departamentos_cargar' %}" >Nuevo Departamento</a>
+    </div>
+    <br>
 
     {% endblock %}
