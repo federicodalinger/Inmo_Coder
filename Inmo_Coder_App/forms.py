@@ -75,7 +75,9 @@ class UserEditForm(UserCreationForm):
        help_texts = {k:"" for k in fields}
 
 class AvatarForm(forms.Form):
-    imagen = forms.ImageField(label="imagen",help_text="")
+#class AvatarForm(forms.Form):
+    imagen = forms.ImageField(label="imagen")
     class Meta:
+        model = User
         fields=["imagen"]
-        help_text = {"imagen":""}
+        help_texts = {k:"" for k in fields}

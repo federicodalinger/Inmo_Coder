@@ -4,7 +4,7 @@ from django.shortcuts import render
 from io import UnsupportedOperation
 from urllib import request
 from .models import *
-from .forms import grabar_mensajes
+from .forms import grabar_mensajes, mensaje_temp
 # from Inmo_Coder_App.forms import CocherasFormulario, ClientesFormulario
 #=======
 from http.client import HTTPResponse
@@ -43,7 +43,7 @@ def mensajes(request):
             #lista=Mensajes.objects.filter(usuarioB = request.user, Leido=False)
             lista = Mensajes.objects.values_list("usuarioA","mensaje")
             for start in lista:
-                print(start[0],start[1])
+                #print(start[0],start[1])
                 lista_mensajes.append(start[0] +" " + start[1])
 
             print(lista_mensajes)
@@ -51,34 +51,36 @@ def mensajes(request):
                 mensaje="Ustedes no tiene mensajes!"
                 return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensajes":mensajes,"usuario": request.user,"imagen": loadavatar(request),"chat": haymensaje(request),"listamensajes":lista})
             else:
-                print("hola"+haymensaje(request))
+                #print("hola"+haymensaje(request))
                 Mensajes.objects.all().update(Leido=True)
 
                 return render(request,"AppMSN/templates/mensajes.html",{"usuario": request.user,"imagen": loadavatar(request),"chat": haymensaje(request),"lista_mensajes":lista})
             return render(request,)
     else:
-        print("Salio por el Else")
+        #print("Salio por el Else")
         return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"usuario": request.user,"imagen": loadavatar(request),"chat": haymensaje(request),"listamensajes":lista})
 
-#def cargar_mensaje(request):
-#        if request.method == "POST":
-#            miformulario = grabar_mensajes(request.POST)
-#            if miformulario.is_valid():
-#                info = miformulario.cleaned_data
-#                usuarioA=request.user
-#                usuarioB=info.get("usuarioB")
-#                mensaje=info.get("mensaje")
-#                leido= False
+def enviarmensaje(request):
+        
+        if request.method == "POST":
+            miformulario = mensaje_temp(request.POST)
+            if miformulario.is_valid():
+                info = miformulario.cleaned_data
+                usuarioA=request.user
+                usuarioB=info.get("usuarioB")
+                mensaje=info.get("mensaje")
+                leido= False
 
-#                text = Mensajes(usuarioA=usuarioA,usuarioB=usuarioB,mensaje=mensaje,Leidp=leido)
-#                text.save()
-#                miformulario=Cargocasa()
-#                mensaje="Casa cargada"
-#                return render(request,"Inmo_Coder_App/casas_cargar.html",{"miformulario":miformulario, "mensaje":mensaje,"imagen":loadavatar(request),"chat": haymensaje(request)})
-#            else:
-#                miformulario=Cargocasa()
-#                mensaje="Error al cargar"
-#                return render(request,"Inmo_Coder_App/casas_cargar.html",{"miformulario":miformulario, "mensaje":mensaje,"imagen":loadavatar(request),"chat": haymensaje(request)})
-#        else:
-#            miformulario=Cargocasa()
-#            return render(request,"Inmo_Coder_App/casas_cargar.html", {"miformulario":miformulario,"imagen":loadavatar(request),"chat": haymensaje(request)})
+                text = Mensajes(usuarioA=usuarioA,usuarioB=usuarioB,mensaje=mensaje,Leido=leido)
+                text.save()
+                miformulario=grabar_mensajes()
+                mensaje="Mensaje Cargado"
+                return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"miformulario":miformulario, "mensaje":mensaje,"imagen":loadavatar(request),"chat": haymensaje(request)})
+            else:
+                miformulario=grabar_mensajes()
+                mensaje="Error al cargar"
+                return render(request,"AppMSN/templates/enviar_mensaje.html",{"miformulario":miformulario, "mensaje":mensaje,"imagen":loadavatar(request),"chat": haymensaje(request)})
+        else:
+            miformulario=mensaje_temp()
+
+            return render(request,"AppMSN/templates/enviar_mensaje.html", {"miformulario":miformulario,"imagen":loadavatar(request),"chat": haymensaje(request)})

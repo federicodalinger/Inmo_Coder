@@ -82,6 +82,7 @@
                         {% if request.user.is_authenticated %}
                         <li><a class="dropdown-item" href="{% url 'editarperfil' %}">Editar Perfil </a></li>
                         <li><a class="dropdown-item" href="{% url 'cargaravatar' %}">Cargar Avatar </a></li>                        
+                        <li><a class="dropdown-item" href="{% url 'AppMSN:enviarmensaje' %}">Enviar Mensaje </a></li>                        
                         
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
                         {% endif %}

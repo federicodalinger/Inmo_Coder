@@ -1,0 +1,54 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block usuariologged %} 
+    {% if request.user.is_authenticated %}
+    Hola {{ user.username }} !!  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+    <button type="button" class="button-solid"> <img src='{{ chat }}' alt ="mensajes" width="35px" hight="35px"></button>
+    {% endif %}
+
+{% endblock %}
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">Enviar<br>Mensajes </h1>
+   
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+<br>
+
+<div class="container">
+    <div class="abs-center">
+    
+        <form action="{% url 'AppMSN:enviarmensaje' %}" method="POST" class="border p-3 form"> {% csrf_token %}
+
+            <div class="abs-center">               
+                <table>
+                    {{ miformulario.as_table }}
+                </table>
+            </div>
+
+            <br>
+
+            <div class="abs-center">
+                <input  type="submit", value="Enviar" class="btn btn-primary">
+            </div>
+                
+        </form>
+        
+    </div>
+
+    <br>
+
+    <div class="abs-center">
+        <h3> {{ mensaje }}</h3>
+    </div>
+
+</div>
+
+{% endblock %}
+

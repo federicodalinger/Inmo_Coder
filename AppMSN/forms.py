@@ -8,3 +8,7 @@ class grabar_mensajes(forms.Form):
     leido = forms.BooleanField()
 
     
+class mensaje_temp(forms.Form):
+    usuarioB = forms.CharField(max_length=50, label="Usuario destinatario")
+    mensaje = forms.CharField(max_length=500)
+    
