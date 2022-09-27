@@ -28,11 +28,11 @@
     {% else %}
         
             
-        <form action="{% url 'cargaravatar' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'cargaravatar' %}" method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
             <br>
 
-            {{miformulario.as_p}}
+            {{ miformulario.as_p }}
 
             <button type="submit">Cargar</button>
 

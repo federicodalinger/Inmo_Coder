@@ -1,5 +1,6 @@
 #<<<<<<< HEAD
 from io import UnsupportedOperation
+from traceback import print_tb
 from urllib import request
 from django.shortcuts import render
 from .models import *
@@ -251,7 +252,7 @@ def login_request(request):
                 if request.user.is_authenticated:
                     
                     lista=Avatar.objects.filter(user = request.user)
-                    
+                    #print(len(lista))
                     if len(lista)!=0:
                         imagen=lista[0].imagen.url
                         #print(imagen)
@@ -309,16 +310,23 @@ def editarperfil(request):
 def cargaravatar(request):
 
     if request.method == "POST":
-        print("POSTOK")
+        
         miformulario = AvatarForm(request.POST, request.FILES)
         if miformulario.is_valid():
-                avatarviejo = Avatar.objects.get(user=request.user)
-                if (avatarviejo.imagen):
-                    avatarviejo.delete()
-                avatar=Avatar(user=request.user,imagen=miformulario.cleaned_data["imagen"])
-                avatar.save()
-                
-                return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Avatar agregado con Exito","imagen":loadavatar(request),"chat":haymensaje(request)})
+                if Avatar.objects.filter(user=request.user).exists() :
+                   
+                    avatarviejo = Avatar.objects.get(user=request.user)
+                    print(avatarviejo.imagen)
+                    if (avatarviejo.imagen):
+                        avatarviejo.delete()
+                    avatar=Avatar(user=request.user,imagen=miformulario.cleaned_data["imagen"])
+                    avatar.save()
+                    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Avatar agregado con Exito","imagen":loadavatar(request),"chat":haymensaje(request)})
+                else:
+                    avatar=Avatar(user=request.user,imagen=miformulario.cleaned_data["imagen"])
+                    avatar.save()
+                    
+                    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Avatar agregado con Exito","imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         miformulario=Avatar()
     return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/cargaravatar.html",{"miformulario":miformulario,"imagen":loadavatar(request),"chat":haymensaje(request)})
