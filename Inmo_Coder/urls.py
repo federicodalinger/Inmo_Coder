@@ -19,9 +19,16 @@ from django.urls import path
 from django.urls import include
 from Inmo_Coder_App import views
 
+###################### Agregado de Playground Avanzado Parte 3 ########################
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("Inmo_Coder_App/", include("Inmo_Coder_App.urls")),
     path("", views.inicio),
 
 ]
+
+###################### Agregado de Playground Avanzado Parte 3 ########################
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

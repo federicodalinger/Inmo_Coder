@@ -4,7 +4,7 @@ from .views import *
 # Aca vinculamos las urls con las views.
 
 urlpatterns = [
-    path("", inicio, name="inicio"), #para que no falle en el inicio
+    path("", inicio, name="inicio"), 
 
     path("casas_buscar/", casas_buscar, name="casas_buscar"),
     path("casas_cargar/", casas_cargar, name="casas_cargar"),
@@ -18,6 +18,7 @@ urlpatterns = [
     path("clientes_buscar/", clientes_buscar, name="clientes_buscar"),
     path("clientes_cargar/", clientes_cargar, name="clientes_cargar"),
 
+    path("about/", about, name="about"),
     path("casas/list/", CasasList.as_view(), name="casas_listar"),
     path("casas/<pk>", CasasDetalle.as_view(), name="casas_detalle"),
     path("casas/nuevo/", CasasCreacion.as_view(), name='casas_crear'),
@@ -44,4 +45,9 @@ urlpatterns = [
     path("clientes/borrar/<pk>", ClientesDelete.as_view(), name='clientes_borrar'),
 
 
+    path("blog_crear/", blog_crear, name="blog_crear"),
+    path("pages/", blog_listar, name="blog_listar"),
+    path("blog_ver/<id>", blog_ver, name="blog_ver"),
+    path("blog_eliminar/<id>", blog_eliminar, name="blog_eliminar"),
+    path("blog_editar/<id>", blog_editar, name="blog_editar"),
 ]

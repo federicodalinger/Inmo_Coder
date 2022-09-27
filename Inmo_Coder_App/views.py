@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import permission_required
 
 
 from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario, ClientesFormulario
+from Inmo_Coder_App.forms import Blog_formulario_carga
 # from Inmo_Coder_App.models import Casas,Departamentos
 #>>>>>>> fede-branch
 
@@ -306,3 +307,93 @@ class ClientesUpdate(UpdateView):
 class ClientesDelete(DeleteView):
     model = Clientes
     success_url = reverse_lazy('clientes_listar')
+################# Views referida a ABOUT (acerca de mi): ################
+
+def about (request):
+    return render (request, "Inmo_Coder_App/about.html")
+
+##################### Views referida a BLOGS ############################
+
+def blog_crear(request):
+
+    if request.method=="POST":
+        miformulario = Blog_formulario_carga(request.POST, request.FILES)
+        if miformulario.is_valid():
+            info= miformulario.cleaned_data
+            titulo= info["titulo"]
+            sub_titulo= info["sub_titulo"]
+            cuerpo_texto= info["cuerpo_texto"]
+            autor= info["autor"]
+            fecha_creacion= info["fecha_creacion"]
+            imagen= info["imagen"]
+
+            blog=Blog(titulo=titulo, sub_titulo=sub_titulo, cuerpo_texto=cuerpo_texto, autor=autor, fecha_creacion=fecha_creacion, imagen=imagen)
+            blog.save()
+
+            miformulario=Blog_formulario_carga()
+            mensaje="Blog creado."
+            return render(request,"Inmo_Coder_App/blog_crear.html",{"miformulario":miformulario, "mensaje":mensaje})
+        else:
+            miformulario=Blog_formulario_carga()
+            mensaje="Error al cargar"
+            return render(request,"Inmo_Coder_App/blog_crear.html",{"miformulario":miformulario, "mensaje":mensaje})
+    else:
+        miformulario=Blog_formulario_carga()
+        return render(request,"Inmo_Coder_App/blog_crear.html", {"miformulario":miformulario})
+
+def blog_listar(request):
+    blogs=Blog.objects.all()
+
+    if len(blogs)!=0:
+        return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs})
+    
+    else:
+        return render(request, "Inmo_Coder_App/pages.html", {"mensaje":"No hay páginas aún."})
+
+def blog_ver(request, id):
+    blog=Blog.objects.get(id=id)
+
+    if blog.cuerpo_texto!="":
+        return render(request, "Inmo_Coder_App/blog_ver.html", {"blog": blog})
+    else:
+        return render(request, "Inmo_Coder_App/blog_ver.html", {"mensaje":"No hay información aún (cuerpo vacío)."})
+
+def blog_eliminar(request, id):
+    blog=Blog.objects.get(id=id)
+    blog.delete()
+    blogs=Blog.objects.all()
+    return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs})
+
+def blog_editar(request, id):
+    blog=Blog.objects.get(id=id)
+
+    if request.method=="POST":
+        miformulario=Blog_formulario_carga(request.POST)
+        if miformulario.is_valid():
+            print("form is valid")
+            info=miformulario.cleaned_data
+            blog.titulo=info["titulo"]
+            blog.sub_titulo=info["sub_titulo"]
+            blog.cuerpo_texto=info["cuerpo_texto"]
+            blog.autor=info["autor"]
+            blog.fecha_creacion=info["fecha_creacion"]
+            blog.imagen=info["imagen"]
+            blog.save()
+            print("guarda blog")
+
+            ### Muestro de nuevo haciendo un render de lo restante.
+            blogs=Blog.objects.all()
+            return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs})
+
+    else:
+        miformulario=Blog_formulario_carga(
+            initial={
+                "titulo":blog.titulo,
+                "sub_titulo":blog.sub_titulo,
+                "cuerpo_texto":blog.cuerpo_texto,
+                "autor":blog.autor,
+                "fecha_creacion":blog.fecha_creacion,
+                "imagen":blog.imagen,
+            }
+        )
+        return render(request, "Inmo_Coder_App/blog_editar.html", {"miformulario":miformulario, "titulo":blog.titulo, "id": blog.id})
