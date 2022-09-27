@@ -3,19 +3,33 @@
 {% load static %}
 
 {% block titulo_de_pagina %}
-<h1 class="mb-5">CREACIÓN DE CASAS</h1>
+<h1 class="mb-5">EDICION DE CASAS</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h1>FORMULARIO DE CASAS</h1>
 
-<form method="POST"> {% csrf_token %} 
 
-    {{  form.as_p}}
+<br>
+<div class="container">
+    <div class="abs-center">    
+        <form method="POST" class="border p-3 form"> {% csrf_token %}
 
-<input type="submit" value="Guardar">
+            <div class="abs-center">               
+                <table>
+                    {{ form.as_table }}
+                </table>
+            </div>
 
-</form>
+            <br>
+
+            <div class="abs-center">
+                <input  type="submit", value="Guardar casa" class="btn btn-primary">
+            </div>
+                
+        </form>       
+    </div>
+</div>
+<br>
 
 {% endblock %}
 

@@ -4,17 +4,42 @@
 
 {% block titulo_de_pagina %}
 
-<h1 class="mb-5">Detalle de Casa en {{ object.ubicacion }}</h1>
+<h1 class="mb-5">Detalle de Casa</h1>
     {% endblock %}
 
 
     {% block contenido_que_cambia %}
 
-    <h5>{{ object }}</h5>
+    <!-- <h5>{{ object }}</h5> -->
+    <br>
+
+    <div class="abs-center">
+        <table>
+            <tbody>
+                <tr>
+                    <th class="clases_para_th_td">Nombre</th>
+                    <th class="clases_para_th_td">Teléfono</th>
+                    <th class="clases_para_th_td">E-mail</th>
+                    <th class="clases_para_th_td">Ambientes</th>
+                    <th class="clases_para_th_td">Precio</th>
+                    <th class="clases_para_th_td">Ubicación</th>
+                    <th class="clases_para_th_td">Fecha de Alta</th>
+                </tr> 
+            
+                <tr>
+                    <td class="clases_para_th_td">{{ object.contacto_nombre }}</td>
+                    <td class="clases_para_th_td">{{ object.contacto_telefono }}</td>
+                    <td class="clases_para_th_td">{{ object.contacto_email }}</td>
+                    <td class="clases_para_th_td">{{ object.ambientes }}</td>
+                    <td class="clases_para_th_td">{{ object.precio }}</td>
+                    <td class="clases_para_th_td">{{ object.ubicacion }}</td>
+                    <td class="clases_para_th_td">{{ object.fecha_de_alta }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
     
 
-
-    {% endblock %}
-    {% block scripts %}
 
     {% endblock %}

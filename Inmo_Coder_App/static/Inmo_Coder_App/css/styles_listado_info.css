@@ -1,0 +1,21 @@
+.div-main {
+    width: 75rem;
+    display: flex;
+    align-items: flex-start;
+}
+  
+.div-main-left {
+flex: 1;
+display: flex;
+align-items: center;
+}
+
+.div-main-right {
+flex: 1;
+display: flex;
+align-items: center;
+}
+
+.no_marks_li{
+    list-style-type:none;
+}

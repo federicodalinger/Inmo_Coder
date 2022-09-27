@@ -3,19 +3,32 @@
 {% load static %}
 
 {% block titulo_de_pagina %}
-<h1 class="mb-5">CREACIÓN DE DEPARTAMENTOS</h1>
+<h1 class="mb-5">EDICION DE DEPARTAMENTO</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h1>FORMULARIO DE DEPARTAMENTOS</h1>
 
-<form method="POST"> {% csrf_token %} 
+<br>
+<div class="container">
+    <div class="abs-center">    
+        <form method="POST" class="border p-3 form"> {% csrf_token %}
 
-    {{  form.as_p}}
+            <div class="abs-center">               
+                <table>
+                    {{ form.as_table }}
+                </table>
+            </div>
 
-<input type="submit" value="Guardar">
+            <br>
 
-</form>
+            <div class="abs-center">
+                <input  type="submit", value="Guardar departamento" class="btn btn-primary">
+            </div>
+                
+        </form>       
+    </div>
+</div>
+<br>
 
 {% endblock %}
 

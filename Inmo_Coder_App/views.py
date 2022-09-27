@@ -358,11 +358,18 @@ def blog_ver(request, id):
     else:
         return render(request, "Inmo_Coder_App/blog_ver.html", {"mensaje":"No hay información aún (cuerpo vacío)."})
 
+def blog_confirm_eliminar(request, id):
+    blog=Blog.objects.get(id=id)
+    return render(request, "Inmo_Coder_App/blog_confirm_eliminar.html", {"blog": blog})
+
 def blog_eliminar(request, id):
     blog=Blog.objects.get(id=id)
     blog.delete()
     blogs=Blog.objects.all()
-    return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs})
+    if len(blogs)!=0:
+        return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs})
+    else:
+        return render(request, "Inmo_Coder_App/pages.html", {"mensaje":"Se borraron todas las páginas."})
 
 def blog_editar(request, id):
     blog=Blog.objects.get(id=id)

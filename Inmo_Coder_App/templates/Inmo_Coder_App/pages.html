@@ -11,31 +11,38 @@
 
 {% block contenido_que_cambia %}
 
+<br>
     {% if mensaje %}
-        <br>
         <h2>{{ mensaje }}</h2>
 
     {% else %}
 
-        <br>
-        {% for blog in blogs %}
-        
-            <li class="px-3 py-1">
-                Blog: {{ blog.titulo }} - {{ blog.sub_titulo }} | Autor: {{ blog.autor }} - Fecha: {{ blog.fecha_creacion }}
+    {% for blog in blogs %}
 
+    <li class="px-3 py-1 no_marks_li">
+        <div class="div-main">
+            <div class="div-main-left">
+                Blog: {{ blog.titulo }} - {{ blog.sub_titulo }} | Autor: {{ blog.autor }} - Fecha: {{ blog.fecha_creacion }}
+            </div>
+
+            <div class="div-main-right">
                 <div class="btn-group px-1" role="group" aria-label="Basic example" >
                     <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'blog_ver' blog.id %}">LEER MAS</a>
-                    <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'blog_eliminar' blog.id %}">ELIMINAR</a>
+                    <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'blog_confirm_eliminar' blog.id %}">ELIMINAR</a>
                     <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'blog_editar' blog.id %}">EDITAR</a>
                 </div>
-            </li>
+            </div>
+        </div>
+    </li>
 
-        {% endfor %}
+    {% endfor %}
 
     {% endif %}
+
     <br>
     <div style="display: flex; justify-content: center">
         <a class="btn btn-warning" href="{% url 'blog_crear' %}" >Nuevo Blog</a>
     </div>
+    <br>
 
 {% endblock %}

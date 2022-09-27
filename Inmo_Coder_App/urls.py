@@ -48,6 +48,7 @@ urlpatterns = [
     path("blog_crear/", blog_crear, name="blog_crear"),
     path("pages/", blog_listar, name="blog_listar"),
     path("blog_ver/<id>", blog_ver, name="blog_ver"),
+    path("blog_confirm_eliminar/<id>", blog_confirm_eliminar, name="blog_confirm_eliminar"),
     path("blog_eliminar/<id>", blog_eliminar, name="blog_eliminar"),
     path("blog_editar/<id>", blog_editar, name="blog_editar"),
 ]

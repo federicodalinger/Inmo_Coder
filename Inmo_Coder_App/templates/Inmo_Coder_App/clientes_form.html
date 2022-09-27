@@ -7,15 +7,28 @@
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h1>FORMULARIO DE CLIENTES</h1>
 
-<form method="POST"> {% csrf_token %} 
+<br>
+<div class="container">
+    <div class="abs-center">    
+        <form method="POST" class="border p-3 form"> {% csrf_token %}
 
-    {{  form.as_p}}
+            <div class="abs-center">               
+                <table>
+                    {{ form.as_table }}
+                </table>
+            </div>
 
-<input type="submit" value="Guardar">
+            <br>
 
-</form>
+            <div class="abs-center">
+                <input  type="submit", value="Guardar cliente" class="btn btn-primary">
+            </div>
+                
+        </form>       
+    </div>
+</div>
+<br>
 
 {% endblock %}
 

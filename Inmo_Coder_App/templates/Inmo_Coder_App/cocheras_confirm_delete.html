@@ -3,18 +3,48 @@
 {% load static %}
 
 {% block titulo_de_pagina %}
-<h1 class="mb-5">CREACIÓN DE COCHERAS</h1>
+<h1 class="mb-5">BORRAR COCHERA</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h1>FORMULARIO DE COCHERAS</h1>
 
 <form method="POST"> {% csrf_token %} 
+    
+    <br>
+    <div class="abs-center">
+    Proceder con el borrado de la cochera?  
+    </div>
 
+    <br>
+    <div class="abs-center">
+        <table>
+            <tbody>
+                <tr>
+                    <th class="clases_para_th_td">Nombre</th>
+                    <th class="clases_para_th_td">Teléfono</th>
+                    <th class="clases_para_th_td">E-mail</th>
+                    <th class="clases_para_th_td">Precio</th>
+                    <th class="clases_para_th_td">Ubicación</th>
+                    <th class="clases_para_th_td">Fecha de Alta</th>
+                </tr> 
+                
+                <tr>
+                    <td class="clases_para_th_td">{{ object.contacto_nombre }}</td>
+                    <td class="clases_para_th_td">{{ object.contacto_telefono }}</td>
+                    <td class="clases_para_th_td">{{ object.contacto_email }}</td>
+                    <td class="clases_para_th_td">{{ object.precio }}</td>
+                    <td class="clases_para_th_td">{{ object.ubicacion }}</td>
+                    <td class="clases_para_th_td">{{ object.fecha_de_alta }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
 
-    Proceder con el borrado de la cochera "{{ object }}"?
-
-<input type="submit" value="Borrar">
+    <div class="abs-center">
+        <input type="submit" value="Borrar">  
+    </div>
+    <br>
 
 </form>
 

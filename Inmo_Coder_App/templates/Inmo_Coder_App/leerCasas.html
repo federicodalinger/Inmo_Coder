@@ -4,25 +4,41 @@
 
 {% block titulo_de_pagina %}
 
-<h1 class="mb-5">Listado de Casas!</h1>
+<h1 class="mb-5">Listado de Casas</h1>
     {% endblock %}
 
 
     {% block contenido_que_cambia %}
     
-    <h1>Listado de Casas</h1>
+    <br>
+
+    {% if object_list|length > 0 %}
 
     {% for casa in object_list %}
 
-        <li>Ubicación: {{ casa.ubicacion }} | Precio: {{ casa.precio }} | Nombre de contacto: {{ casa.contacto_nombre }}</li> 
-        
-        <button>
-            <a href="{% url 'casas_borrar' casa.id %}">ELIMINAR</a>
-            <a href="{% url 'casas_editar' casa.id %}">Editar</a>
-            <a href="{% url 'casas_detalle' casa.id %}">Ver detalles</a>
-        </button>
+        <li class="px-3 py-1 no_marks_li">
+            <div class="div-main">
+                <div class="div-main-left">
+                    Ubicación: {{ casa.ubicacion }} | Precio: {{ casa.precio }} | Nombre de contacto: {{ casa.contacto_nombre }}
+                </div>
 
+                <div class="div-main-right">
+                    <div class="btn-group px-1" role="group" aria-label="Basic example" >
+                        <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'casas_detalle' casa.id %}">VER DETALLES</a>
+                        <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'casas_borrar' casa.id %}">ELIMINAR</a>
+                        <a class="btn btn-primary btn-sm py-0" style="font-size: 0.8rem" href="{% url 'casas_editar' casa.id %}">EDITAR</a>
+                    </div>
+                </div>
+            </div>
+        </li>
     {% endfor %}
 
+    {% else %}
+    <h2>No hay casas en la base de datos.</h2>
+
+    {% endif %}
+
+<br>
+        
 
     {% endblock %}
