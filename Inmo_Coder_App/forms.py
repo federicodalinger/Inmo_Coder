@@ -71,6 +71,7 @@ class Blog_formulario_carga(forms.ModelForm):
         model = Blog
         fields = ('titulo','sub_titulo','cuerpo_texto', 'autor', 'fecha_creacion', 'imagen' )
         widgets = {'fecha_creacion' : DatePickerInput()}
+        
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)

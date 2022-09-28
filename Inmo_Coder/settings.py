@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Inmo_Coder_App',
-    'ckeditor'
+    'ckeditor',
     'AppMSN',
 ]
 

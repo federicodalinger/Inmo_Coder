@@ -4,8 +4,11 @@
 
 {% block usuariologged %} 
     {% if request.user.is_authenticated %}
-    Hola {{ user.username }} !!  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
-    <button type="button" class="button-solid"> <img src='{{ chat }}' alt ="mensajes" width="35px" hight="35px"></button>
+            
+    <form action="{% url 'AppMSN:mensajes' %}" method="POST" > {% csrf_token %}
+        Hola {{ user.username }}  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+        <button type="submit" class="button-solid"> <img src='{{ chat }}' alt ="mensajes" width="35px" hight="35px"></button>
+    </form>
     {% endif %}
 
 {% endblock %}
@@ -19,26 +22,42 @@
 
 {% block contenido_que_cambia %}
 
-
+<br>
     {% if mensaje %}
    
-        <h8>{{ mensaje }}</h8>
-        <br>
-   
+    <div class="abs-center">
+        <h3> {{ mensaje }}</h3>
+    </div>
+
     {% else %}
         
+    <div class="container">
+        <div class="abs-center">
+        
+            <form action="{ editarperfil }" method="POST" class="border p-3 form"> {% csrf_token %}
+    
+                <div class="abs-center">               
+                    <table>
+                        {{ form.as_table }}
+                    </table>
+                </div>
+    
+                <br>
+    
+                <div class="abs-center">
+                    <input  type="submit", value="Guardas Cambios" class="btn btn-primary">
+                </div>
+                    
+            </form>
             
-        <form action="{ editarperfil }" method="POST">
-            {% csrf_token %}
-            <br>
+        </div>
+    
+        <br>
 
-            {{form.as_p}}
-
-            <button type="submit">Guardas Cambios</button>
-
-        </form>
-
+    </div>    
+    
    {% endif %}
 
+<br>
 {% endblock %}
 

@@ -87,10 +87,26 @@ def casas_buscar(request):
             titulo = {}
             mensaje_alerta="Casa inexistente en la base de datos."
 
-        return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo,"casas":casas, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            if request.user.is_authenticated :#or request.user != "AnonymousUser":
+                return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            else:
+                return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo,"mensaje":mensaje_alerta})
+        else:
+            if request.user.is_authenticated :#or request.user != "AnonymousUser":
+                return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo,"casas":casas, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            else:
+                return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo,"casas":casas})        
+
+
+        
     else:
         ocultar_contenido_inicial=True
-        return render (request, "Inmo_Coder_App/casas_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
+
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/casas_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/casas_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
+
 
 ################# Views referida a DEPARTAMENTOS: ################
 def departamentos_cargar (request):
@@ -140,11 +156,25 @@ def departamentos_buscar(request):
         if len(deptos)==0:
             titulo = {}
             mensaje_alerta="Departamento inexistente en la base de datos."
-        
-        return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"titulo":titulo,"deptos":deptos, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            
+            if request.user.is_authenticated :#or request.user != "AnonymousUser":
+                return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"titulo":titulo, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            else:
+                return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"titulo":titulo, "mensaje":mensaje_alerta})
+        else:
+            if request.user.is_authenticated :#or request.user != "AnonymousUser":
+                return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"titulo":titulo,"deptos":deptos, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            else:
+                return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"titulo":titulo,"deptos":deptos})
+
     else:
         ocultar_contenido_inicial=True
-        return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
+
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
+        
 
 ################# Views referida a COCHERAS: ################
 def cocheras_cargar (request):
@@ -188,10 +218,24 @@ def cocheras_buscar (request):
             titulo = {}
             mensaje_alerta="Cochera inexistente en la base de datos."
 
-        return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"cocheras":cocheras, "titulo":titulo, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            if request.user.is_authenticated :#or request.user != "AnonymousUser":
+                 return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"titulo":titulo, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            else:
+                 return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"titulo":titulo,"mensaje":mensaje_alerta}) 
+        else:
+            if request.user.is_authenticated :#or request.user != "AnonymousUser":
+                return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"titulo":titulo,"cocheras":cocheras, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
+            else:
+                return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"titulo":titulo,"cocheras":cocheras}) 
+
     else:
         ocultar_contenido_inicial=True
-        return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
+
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
+
 
 ################# Views referida a CLIENTES: ################
 def clientes_cargar (request):
@@ -333,7 +377,7 @@ def cargaravatar(request):
                     
                     return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Avatar agregado con Exito","imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
-        miformulario=Avatar()
+        miformulario=AvatarForm()
     return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/cargaravatar.html",{"miformulario":miformulario,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 
@@ -431,7 +475,12 @@ class ClientesDelete(DeleteView):
 ################# Views referida a ABOUT (acerca de mi): ################
 
 def about (request):
-    return render (request, "Inmo_Coder_App/about.html")
+    if request.user.is_authenticated :#or request.user != "AnonymousUser":
+        return render (request, "Inmo_Coder_App/about.html",{"imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        return render (request, "Inmo_Coder_App/about.html")
+
+
 
 ##################### Views referida a BLOGS ############################
 
@@ -453,44 +502,61 @@ def blog_crear(request):
 
             miformulario=Blog_formulario_carga()
             mensaje="Blog creado."
-            return render(request,"Inmo_Coder_App/blog_crear.html",{"miformulario":miformulario, "mensaje":mensaje})
+            return render(request,"Inmo_Coder_App/blog_crear.html",{"miformulario":miformulario, "mensaje":mensaje, "imagen":loadavatar(request),"chat":haymensaje(request)} )
         else:
             miformulario=Blog_formulario_carga()
             mensaje="Error al cargar"
-            return render(request,"Inmo_Coder_App/blog_crear.html",{"miformulario":miformulario, "mensaje":mensaje})
+            return render(request,"Inmo_Coder_App/blog_crear.html",{"miformulario":miformulario, "mensaje":mensaje, "imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         miformulario=Blog_formulario_carga()
-        return render(request,"Inmo_Coder_App/blog_crear.html", {"miformulario":miformulario})
+        return render(request,"Inmo_Coder_App/blog_crear.html", {"miformulario":miformulario, "imagen":loadavatar(request),"chat":haymensaje(request)})
 
 def blog_listar(request):
     blogs=Blog.objects.all()
 
     if len(blogs)!=0:
-        return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs})
+
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/pages.html",{"blogs":blogs, "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/pages.html", {"blogs":blogs})
     
     else:
-        return render(request, "Inmo_Coder_App/pages.html", {"mensaje":"No hay páginas aún."})
+
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/pages.html",{"mensaje":"No hay páginas aún.", "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/pages.html", {"mensaje":"No hay páginas aún."})
 
 def blog_ver(request, id):
     blog=Blog.objects.get(id=id)
 
     if blog.cuerpo_texto!="":
-        return render(request, "Inmo_Coder_App/blog_ver.html", {"blog": blog})
+
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/blog_ver.html",{"blog":blog, "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            if request.user.is_authenticated :#or request.user != "AnonymousUser":
+                return render (request, "Inmo_Coder_App/blog_ver.html",{"mensaje":"No hay información aún (cuerpo vacío).", "imagen":loadavatar(request),"chat":haymensaje(request)})
+            else:
+                return render (request, "Inmo_Coder_App/blog_ver.html")
+
+
     else:
-        return render(request, "Inmo_Coder_App/blog_ver.html", {"mensaje":"No hay información aún (cuerpo vacío)."})
+        return render(request, "Inmo_Coder_App/blog_ver.html", {"mensaje":""})
 
 def blog_confirm_eliminar(request, id):
     blog=Blog.objects.get(id=id)
-    return render(request, "Inmo_Coder_App/blog_confirm_eliminar.html", {"blog": blog})
+    return render(request, "Inmo_Coder_App/blog_confirm_eliminar.html", {"blog": blog, "imagen":loadavatar(request),"chat":haymensaje(request)})
 
 def blog_eliminar(request, id):
     blog=Blog.objects.get(id=id)
     blog.delete()
     blogs=Blog.objects.all()
     if len(blogs)!=0:
-        return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs})
+        return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs, "imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
-        return render(request, "Inmo_Coder_App/pages.html", {"mensaje":"Se borraron todas las páginas."})
+        return render(request, "Inmo_Coder_App/pages.html", {"mensaje":"Se borraron todas las páginas.", "imagen":loadavatar(request),"chat":haymensaje(request)})
 
 def blog_editar(request, id):
     blog=Blog.objects.get(id=id)
@@ -511,7 +577,7 @@ def blog_editar(request, id):
 
             ### Muestro de nuevo haciendo un render de lo restante.
             blogs=Blog.objects.all()
-            return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs})
+            return render(request, "Inmo_Coder_App/pages.html", {"blogs": blogs, "imagen":loadavatar(request),"chat":haymensaje(request)})
 
     else:
         miformulario=Blog_formulario_carga(
@@ -524,4 +590,4 @@ def blog_editar(request, id):
                 "imagen":blog.imagen,
             }
         )
-        return render(request, "Inmo_Coder_App/blog_editar.html", {"miformulario":miformulario, "titulo":blog.titulo, "id": blog.id})
+        return render(request, "Inmo_Coder_App/blog_editar.html", {"miformulario":miformulario, "titulo":blog.titulo, "id": blog.id, "imagen":loadavatar(request),"chat":haymensaje(request)})

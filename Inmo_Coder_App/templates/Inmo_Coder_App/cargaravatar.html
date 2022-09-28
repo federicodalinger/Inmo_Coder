@@ -19,26 +19,42 @@
 
 {% block contenido_que_cambia %}
 
-
+<br>
     {% if mensaje %}
    
-        <h8>{{ mensaje }}</h8>
-        <br>
+    <div class="abs-center">
+        <h3> {{ mensaje }}</h3>
+    </div>
    
     {% else %}
+     
+    <div class="container">
+        <div class="abs-center">
         
+            <form action="{% url 'cargaravatar' %}" method="POST" class="border p-3 form"> {% csrf_token %}
+    
+                <div class="abs-center">               
+                    <table>
+                        {{ miformulario.as_table }}
+                    </table>
+                </div>
+    
+                <br>
+    
+                <div class="abs-center">
+                    <input  type="submit", value="Cargar" class="btn btn-primary">
+                </div>
+                    
+            </form>
             
-        <form action="{% url 'cargaravatar' %}" method="POST" enctype="multipart/form-data" novalidate>
-            {% csrf_token %}
-            <br>
+        </div>
+    
+        <br>
 
-            {{ miformulario.as_p }}
-
-            <button type="submit">Cargar</button>
-
-        </form>
+    </div>
 
    {% endif %}
 
+<br>
 {% endblock %}
 

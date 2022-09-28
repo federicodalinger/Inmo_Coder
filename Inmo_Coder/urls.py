@@ -31,14 +31,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("Inmo_Coder_App/", include("Inmo_Coder_App.urls")),
     path("", views.inicio),
+    path("AppMSN/", include("AppMSN.urls")),
 
 ]
 
 ###################### Agregado de Playground Avanzado Parte 3 ########################
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    path("AppMSN/", include("AppMSN.urls")),
 
-]
 
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
