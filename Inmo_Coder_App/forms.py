@@ -3,8 +3,12 @@
 #=======
 #>>>>>>> feligoi
 from datetime import datetime
+from email.errors import MessageError
+from email.policy import default
 from django import forms
 import datetime
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from .models import Blog
 
@@ -67,3 +71,36 @@ class Blog_formulario_carga(forms.ModelForm):
         model = Blog
         fields = ('titulo','sub_titulo','cuerpo_texto', 'autor', 'fecha_creacion', 'imagen' )
         widgets = {'fecha_creacion' : DatePickerInput()}
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Repetir Contraseña", widget=forms.PasswordInput)
+    #image = forms.ImageField()
+
+    class Meta:
+        model = User
+        fields = ["username","email", "password1","password2"]
+        help_texts = {k:"" for k in fields}
+
+
+class UserEditForm(UserCreationForm):
+    email = forms.EmailField(label="Modificar Email",max_length=100)
+    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Repetir Contraseña", widget=forms.PasswordInput)
+    #image = forms.ImageField()
+    last_name=forms.CharField(label="Modificar Last Name")
+    first_name=forms.CharField(label="Modificar First Name")
+    class Meta:
+       model = User
+       fields = ["email", "password1","password2","last_name","first_name"]
+       help_texts = {k:"" for k in fields}
+
+class AvatarForm(forms.Form):
+#class AvatarForm(forms.Form):
+    imagen = forms.ImageField( error_messages={
+               'required': 'Seleccione el Avatar', 'empty':'','invalid_image':'','missing':'','invalid':''
+                })
+    class Meta:
+        model = forms
+        fields=("imagen")
+        help_texts = {k:"" for k in fields}

@@ -1,3 +1,7 @@
+#<<<<<<< HEAD
+from io import UnsupportedOperation
+from traceback import print_tb
+from urllib import request
 from django.shortcuts import render
 from .models import *
 from http.client import HTTPResponse
@@ -14,14 +18,30 @@ from Inmo_Coder_App.forms import Blog_formulario_carga
 # from Inmo_Coder_App.models import Casas,Departamentos
 #>>>>>>> fede-branch
 
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from .forms import AvatarForm, UserRegisterForm, UserEditForm
+from AppMSN.views import mensajes, haymensaje
+from .functions import loadavatar
+
+
+
 # Create your views here.
 
 def inicio (request):
-    return render (request, "Inmo_Coder_App/inicio.html")
+    print(request.user)
+    print(request.user.is_authenticated)
+
+    if request.user.is_authenticated :#or request.user != "AnonymousUser":
+    #if request.user is not None:
+        return render (request, "Inmo_Coder_App/inicio.html",{"imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        return render (request, "Inmo_Coder_App/inicio.html")
 
 ################# Views referida a CASAS: ################
 #DEJO TIPEADO EL PERMISO DE ADMIN EN CASO QUE SEA NECESARIO @permission_required("admin.create_post", login_url="/", raise_exception=True)
 def casas_cargar (request):
+    
     if request.method == "POST":
         miformulario = Cargocasa(request.POST)
         if miformulario.is_valid():
@@ -38,16 +58,17 @@ def casas_cargar (request):
             casa.save()
             miformulario=Cargocasa()
             mensaje="Casa cargada"
-            return render(request,"Inmo_Coder_App/casas_cargar.html",{"miformulario":miformulario, "mensaje":mensaje})
+            return render(request,"Inmo_Coder_App/casas_cargar.html",{"miformulario":miformulario, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
         else:
             miformulario=Cargocasa()
             mensaje="Error al cargar"
-            return render(request,"Inmo_Coder_App/casas_cargar.html",{"miformulario":miformulario, "mensaje":mensaje})
+            return render(request,"Inmo_Coder_App/casas_cargar.html",{"miformulario":miformulario, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         miformulario=Cargocasa()
-        return render(request,"Inmo_Coder_App/casas_cargar.html", {"miformulario":miformulario})
+        return render(request,"Inmo_Coder_App/casas_cargar.html", {"miformulario":miformulario,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 def casas_buscar(request):
+    
     if request.method == "POST":
         respuesta=request.POST.get('ubicacion')
         casas = Casas.objects.filter(ubicacion=respuesta)
@@ -66,13 +87,14 @@ def casas_buscar(request):
             titulo = {}
             mensaje_alerta="Casa inexistente en la base de datos."
 
-        return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo,"casas":casas, "mensaje":mensaje_alerta})
+        return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo,"casas":casas, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         ocultar_contenido_inicial=True
-        return render (request, "Inmo_Coder_App/casas_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
+        return render (request, "Inmo_Coder_App/casas_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 ################# Views referida a DEPARTAMENTOS: ################
 def departamentos_cargar (request):
+
     if request.method == "POST":
         miformulario = Deptocarga(request.POST)
         if miformulario.is_valid():
@@ -90,16 +112,17 @@ def departamentos_cargar (request):
             casa.save()
             miformulario=Deptocarga()
             mensaje="Departamento cargado"
-            return render(request,"Inmo_Coder_App/departamentos_cargar.html",{"miformulario":miformulario, "mensaje":mensaje})
+            return render(request,"Inmo_Coder_App/departamentos_cargar.html",{"miformulario":miformulario, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
         else:
             miformulario=Deptocarga()
             mensaje="Error al cargar"
-            return render(request,"Inmo_Coder_App/departamentos_cargar.html",{"miformulario":miformulario, "mensaje":mensaje})
+            return render(request,"Inmo_Coder_App/departamentos_cargar.html",{"miformulario":miformulario, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         miformulario=Deptocarga()
-        return render(request,"Inmo_Coder_App/departamentos_cargar.html", {"miformulario":miformulario})
+        return render(request,"Inmo_Coder_App/departamentos_cargar.html", {"miformulario":miformulario,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 def departamentos_buscar(request):
+    global imagen
     if request.method == "POST":
         respuesta=request.POST.get('ubicacion')
         deptos = Departamentos.objects.filter(ubicacion=respuesta)
@@ -118,14 +141,14 @@ def departamentos_buscar(request):
             titulo = {}
             mensaje_alerta="Departamento inexistente en la base de datos."
         
-        return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"titulo":titulo,"deptos":deptos, "mensaje":mensaje_alerta})
+        return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"titulo":titulo,"deptos":deptos, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         ocultar_contenido_inicial=True
-        return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
+        return render (request, "Inmo_Coder_App/departamentos_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 ################# Views referida a COCHERAS: ################
 def cocheras_cargar (request):
-
+    
     if request.method == 'POST':
 
         form_cocheras = CocherasFormulario(request.POST)
@@ -136,17 +159,18 @@ def cocheras_cargar (request):
             cochera.save()
             form_cocheras = CocherasFormulario()
             mensaje="Cochera cargada"
-            return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras, "mensaje":mensaje})
+            return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
         else:
             form_cocheras = CocherasFormulario()
             mensaje="Error al cargar"
-            return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras, "mensaje":mensaje})
+            return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
     
     else:
         form_cocheras = CocherasFormulario()
-        return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras})
+        return render (request, "Inmo_Coder_App/cocheras_cargar.html", {"form_cocheras":form_cocheras,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 def cocheras_buscar (request):
+    global imagen
     if request.method == "POST":
         ubi=request.POST.get("ubicacion")
         cocheras=Cocheras.objects.filter(ubicacion=ubi)
@@ -164,13 +188,14 @@ def cocheras_buscar (request):
             titulo = {}
             mensaje_alerta="Cochera inexistente en la base de datos."
 
-        return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"cocheras":cocheras, "titulo":titulo, "mensaje":mensaje_alerta})
+        return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"cocheras":cocheras, "titulo":titulo, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         ocultar_contenido_inicial=True
-        return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
+        return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 ################# Views referida a CLIENTES: ################
 def clientes_cargar (request):
+   
     if request.method == 'POST':
 
         form_clientes = ClientesFormulario(request.POST)
@@ -181,17 +206,18 @@ def clientes_cargar (request):
             cliente.save()
             form_clientes = ClientesFormulario()
             mensaje="Cliente cargado"
-            return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes, "mensaje":mensaje})
+            return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
         else:
             form_clientes = ClientesFormulario()
             mensaje="Error al cargar"
-            return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes, "mensaje":mensaje})
+            return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
     
     else:
         form_clientes = ClientesFormulario()
-        return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes})
+        return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 def clientes_buscar (request):
+
     if request.method == "POST":
         contacto=request.POST.get("contacto_nombre")
         clientes=Clientes.objects.filter(contacto_nombre=contacto)
@@ -210,10 +236,105 @@ def clientes_buscar (request):
             titulo = {}
             mensaje_alerta="Cliente inexistente en la base de datos."
 
-        return render (request, "Inmo_Coder_App/clientes_buscar.html", {"clientes":clientes, "titulo":titulo, "mensaje":mensaje_alerta})
+        return render (request, "Inmo_Coder_App/clientes_buscar.html", {"clientes":clientes, "titulo":titulo, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         ocultar_contenido_inicial=True
-        return render (request, "Inmo_Coder_App/clientes_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
+        return render (request, "Inmo_Coder_App/clientes_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
+
+
+def login_request(request):
+
+    if request.method=="POST":
+        form = AuthenticationForm(request, data=request.POST)
+        print(form.error_messages)
+        if form.is_valid():
+            user = request.POST["username"]
+            clave = request.POST["password"]
+            usuario=authenticate(username=user, password=clave)
+            
+            if usuario is not None:
+                login(request, usuario)
+                if request.user.is_authenticated:
+                    
+                    lista=Avatar.objects.filter(user = request.user)
+                    #print(len(lista))
+                    if len(lista)!=0:
+                        imagen=lista[0].imagen.url
+                        #print(imagen)
+                    else:
+                        imagen=None
+                    
+                    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Bienvenido {usuario}","usuario": usuario,"imagen": loadavatar(request),"chat":haymensaje(request)})
+                else:
+                    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"mensaje":"Usuario o contraseña invalida"})                                    
+            else:
+                return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"mensaje":"Usuario o contraseña invalida"})
+                #print("usuario incorreto")
+        else:
+            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"mensaje":"Usuario o contraseña invalida"})
+            #print("formulario invalido")
+    else:
+        form = AuthenticationForm()
+        #print("get")
+        return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/login.html",{"form":form})
+
+def signin_request(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data["username"]
+            form.save()
+    
+            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado"})
+
+    else:
+        form = UserRegisterForm()
+    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form,"imagen": loadavatar(request),"chat":haymensaje(request)})
+
+#@login_required
+def editarperfil(request):
+
+    usuario=request.user
+    if request.method == "POST":
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            #informacion = form.cleaned_data
+            usuario.email = form.cleaned_data["email"]
+            usuario.password1 = form.cleaned_data["password1"]
+            usuario.password2 = form.cleaned_data["password2"]
+            usuario.last_name = form.cleaned_data["last_name"]
+            usuario.first_name = form.cleaned_data["first_name"]
+            usuario.save()
+
+            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Perfil de {usuario} editado","imagen":loadavatar(request),"chat":haymensaje(request)})
+
+    else:
+        form = UserEditForm(instance=usuario)
+    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/editarperfil.html",{"usuario":usuario,"form":form,"imagen":loadavatar(request),"chat":haymensaje(request)})
+
+def cargaravatar(request):
+
+    if request.method == "POST":
+        
+        miformulario = AvatarForm(request.POST, request.FILES)
+        if miformulario.is_valid():
+                if Avatar.objects.filter(user=request.user).exists() :
+                   
+                    avatarviejo = Avatar.objects.get(user=request.user)
+                    print(avatarviejo.imagen)
+                    if (avatarviejo.imagen):
+                        avatarviejo.delete()
+                    avatar=Avatar(user=request.user,imagen=miformulario.cleaned_data["imagen"])
+                    avatar.save()
+                    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Avatar agregado con Exito","imagen":loadavatar(request),"chat":haymensaje(request)})
+                else:
+                    avatar=Avatar(user=request.user,imagen=miformulario.cleaned_data["imagen"])
+                    avatar.save()
+                    
+                    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Avatar agregado con Exito","imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        miformulario=Avatar()
+    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/cargaravatar.html",{"miformulario":miformulario,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 
 ###PARA CLASES BASADAS EN VISTAS

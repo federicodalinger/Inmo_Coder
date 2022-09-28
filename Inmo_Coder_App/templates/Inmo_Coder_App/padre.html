@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <style type="text/css">
+            .button-solid {
+                border: none;
+            }
+        </style>
+
+
+
 
         {% load static %}
 
@@ -80,7 +88,30 @@
                 
                 <a class="btn btn-info" href="{% url 'about' %}">Acerca de mi</a>
 
-                <a class="btn btn-primary" href="http://127.0.0.1:8000/admin/">Administrador</a>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</a>
+                  
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'signin_request' %}">Signup</a></li>
+                        {% if not request.user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'login_request' %}">Login </a></li>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'editarperfil' %}">Editar Perfil </a></li>
+                        <li><a class="dropdown-item" href="{% url 'cargaravatar' %}">Cargar Avatar </a></li>                        
+                        <li><a class="dropdown-item" href="{% url 'AppMSN:enviarmensaje' %}">Enviar Mensaje </a></li>                        
+                        
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="text">
+                    {% block usuariologged %}  
+                        
+                    {% endblock %}
+                    
+                    
+                </div>
             </div>
         </nav>
 
@@ -91,7 +122,20 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
+<<<<<<< HEAD
                             {% block titulo_de_pagina %} {% endblock %}
+=======
+                            <br>
+                            {% block titulo_de_pagina %} {% endblock %} 
+                            <!-- Signup form-->
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- * * SB Forms Contact Form * *-->
+                            <!-- * * * * * * * * * * * * * * *-->
+                            <!-- This form is pre-integrated with SB Forms.-->
+                            <!-- To make this form functional, sign up at-->
+                            <!-- https://startbootstrap.com/solution/contact-forms-->
+                            <!-- to get an API token!-->
+>>>>>>> fede-branch-v2
                             
                         </div>
                     </div>

@@ -1,0 +1,37 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">Login</h1>
+ 
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+
+    {% if mensaje %}
+   
+        <h8>{{ mensaje }}</h8>
+        <br>
+   
+    {% else %}
+        
+            
+        <form action="" method="POST">
+            {% csrf_token %}
+            <br>
+
+            {{form.as_p}}
+
+            <button type="submit">Iniciar Sesión</button>
+
+        </form>
+
+   {% endif %}
+
+{% endblock %}
+

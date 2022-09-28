@@ -1,0 +1,57 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+
+{% load static %}
+
+{% block usuariologged %} 
+    {% if request.user.is_authenticated %}
+        Hola {{ user.username }} !!  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+        <form action="{% url 'AppMSN:mensajes' %}" method="POST" class="border p-3 form"> {% csrf_token %}
+            <button type="submit" class="button-solid">Mensajes!!<img src="{{ chat }}" alt="mensajes" width="35px" hight="35px"></button>
+        </form>
+       
+    {% endif %}
+
+{% endblock %}
+
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">INMO. CODER<br>INICIO</h1>
+
+    
+{% endblock %}
+
+
+
+{% block contenido_que_cambia %}
+
+    <br>
+    <h3> </h3>
+    {% if mensaje %}
+    <h8>{{ mensaje }}</h8>
+    
+{% else %}
+    <table>
+        <tbody>
+            <tr>
+                <th class="clases_para_th_td">Mensaje de:</th>
+                <th class="clases_para_th_td">Mensaje</th>
+                
+            </tr> 
+        
+            {% for msj in lista_mensajes %}    
+            <tr>
+                <td class="clases_para_th_td">{{ msj }}</td>
+                                
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    
+{% endif %}
+
+    
+{% endblock %}
+

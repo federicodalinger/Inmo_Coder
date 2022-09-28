@@ -1,3 +1,4 @@
+import os
 """
 Django settings for Inmo_Coder project.
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Inmo_Coder_App',
     'ckeditor'
+    'AppMSN',
 ]
 
 MIDDLEWARE = [
@@ -200,3 +202,8 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+#LOGIN_URL='/Inmo_Coder_App/login/'
+
+MEDIA_URL='/media/'
+MEDIA_ROOT=BASE_DIR/'media'
+#MEDIA_ROOT=os.path.join(BASE_DIR, 'media')

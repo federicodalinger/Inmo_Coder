@@ -12,9 +12,10 @@
 
 {% block titulo_de_pagina %}
 
-    <h1 class="mb-5">CARGAR<br>COCHERAS</h1>
-    
+    <h1 class="mb-5">Enviar<br>Mensajes </h1>
+   
 {% endblock %}
+
 
 {% block contenido_que_cambia %}
 
@@ -23,18 +24,18 @@
 <div class="container">
     <div class="abs-center">
     
-        <form action="{% url 'cocheras_cargar' %}" method="POST" class="border p-3 form"> {% csrf_token %}
+        <form action="{% url 'AppMSN:enviarmensaje' %}" method="POST" class="border p-3 form"> {% csrf_token %}
 
             <div class="abs-center">               
                 <table>
-                    {{ form_cocheras.as_table }}
+                    {{ miformulario.as_table }}
                 </table>
             </div>
 
             <br>
 
             <div class="abs-center">
-                <input  type="submit", value="Cargar cochera" class="btn btn-primary">
+                <input  type="submit", value="Enviar" class="btn btn-primary">
             </div>
                 
         </form>
@@ -48,7 +49,6 @@
     </div>
 
 </div>
-<br>
 
 {% endblock %}
 

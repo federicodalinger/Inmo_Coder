@@ -2,6 +2,14 @@
 
 {% load static %}
 
+{% block usuariologged %} 
+    {% if request.user.is_authenticated %}
+    Hola {{ user.username }} !!  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+    <button type="button" class="button-solid"> <img src='{{ chat }}' alt ="mensajes" width="35px" hight="35px"></button>
+    {% endif %}
+
+{% endblock %}
+
 {% block titulo_de_pagina %}
 
     <h1 class="mb-5">BUSCAR<br>CLIENTES</h1>

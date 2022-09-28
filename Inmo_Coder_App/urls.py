@@ -1,6 +1,7 @@
+from re import template
 from django.urls import path
 from .views import *
-
+from django.contrib.auth.views import LogoutView
 # Aca vinculamos las urls con las views.
 
 urlpatterns = [
@@ -51,4 +52,9 @@ urlpatterns = [
     path("blog_confirm_eliminar/<id>", blog_confirm_eliminar, name="blog_confirm_eliminar"),
     path("blog_eliminar/<id>", blog_eliminar, name="blog_eliminar"),
     path("blog_editar/<id>", blog_editar, name="blog_editar"),
+    path("login/", login_request, name="login_request"),
+    path("signin/", signin_request, name="signin_request"),
+    path("logout/", LogoutView.as_view(template_name="Inmo_Coder_App/templates/Inmo_Coder_App/logout.html"),name="logout"),
+    path("editarperfil/", editarperfil, name="editarperfil"),
+    path("cargaravatar/", cargaravatar, name="cargaravatar"),
 ]

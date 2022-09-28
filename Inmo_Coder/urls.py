@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from xml.dom.minidom import Document
 from django.contrib import admin
 from django.urls import path
 
@@ -22,6 +23,9 @@ from Inmo_Coder_App import views
 ###################### Agregado de Playground Avanzado Parte 3 ########################
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,3 +36,9 @@ urlpatterns = [
 
 ###################### Agregado de Playground Avanzado Parte 3 ########################
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path("AppMSN/", include("AppMSN.urls")),
+
+]
+
+
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
