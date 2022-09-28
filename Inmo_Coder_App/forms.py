@@ -3,6 +3,8 @@
 #=======
 #>>>>>>> feligoi
 from datetime import datetime
+from email.errors import MessageError
+from email.policy import default
 from django import forms
 import datetime
 from django.contrib.auth.forms import UserCreationForm
@@ -76,8 +78,10 @@ class UserEditForm(UserCreationForm):
 
 class AvatarForm(forms.Form):
 #class AvatarForm(forms.Form):
-    imagen = forms.ImageField(label="imagen")
+    imagen = forms.ImageField( error_messages={
+               'required': 'Seleccione el Avatar', 'empty':'','invalid_image':'','missing':'','invalid':''
+                })
     class Meta:
-        model = User
-        fields=["imagen"]
+        model = forms
+        fields=("imagen")
         help_texts = {k:"" for k in fields}
