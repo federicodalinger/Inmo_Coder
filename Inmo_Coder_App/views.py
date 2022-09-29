@@ -13,7 +13,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import permission_required
 
 
-from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario, ClientesFormulario
+from Inmo_Coder_App.forms import Cargocasa,Deptocarga, CocherasFormulario
 from Inmo_Coder_App.forms import Blog_formulario_carga
 # from Inmo_Coder_App.models import Casas,Departamentos
 #>>>>>>> fede-branch
@@ -97,8 +97,6 @@ def casas_buscar(request):
             else:
                 return render (request, "Inmo_Coder_App/casas_buscar.html", {"titulo":titulo,"casas":casas})        
 
-
-        
     else:
         ocultar_contenido_inicial=True
 
@@ -235,55 +233,6 @@ def cocheras_buscar (request):
             return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
         else:
             return render (request, "Inmo_Coder_App/cocheras_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial})
-
-
-################# Views referida a CLIENTES: ################
-def clientes_cargar (request):
-   
-    if request.method == 'POST':
-
-        form_clientes = ClientesFormulario(request.POST)
-
-        if form_clientes.is_valid():
-            informacion = form_clientes.cleaned_data
-            cliente = Clientes(motivo_descripcion=informacion['motivo_descripcion'], motivo_ubicacion=informacion['motivo_ubicacion'], motivo_precio=informacion['motivo_precio'], contacto_nombre=informacion['contacto_nombre'], contacto_telefono=informacion['contacto_telefono'], contacto_email=informacion['contacto_email'], fecha_de_alta=informacion['fecha_de_alta'])
-            cliente.save()
-            form_clientes = ClientesFormulario()
-            mensaje="Cliente cargado"
-            return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
-        else:
-            form_clientes = ClientesFormulario()
-            mensaje="Error al cargar"
-            return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes, "mensaje":mensaje,"imagen":loadavatar(request),"chat":haymensaje(request)})
-    
-    else:
-        form_clientes = ClientesFormulario()
-        return render (request, "Inmo_Coder_App/clientes_cargar.html", {"form_clientes":form_clientes,"imagen":loadavatar(request),"chat":haymensaje(request)})
-
-def clientes_buscar (request):
-
-    if request.method == "POST":
-        contacto=request.POST.get("contacto_nombre")
-        clientes=Clientes.objects.filter(contacto_nombre=contacto)
-        # titulo = "Nombre, teléfono, E-mail"
-        titulo = {
-                "contacto_nombre":"Nombre", 
-                "contacto_telefono":"Teléfono",
-                "contacto_email":"E-mail",
-                "motivo_descripcion":"Descripción de operación", 
-                "motivo_ubicacion":"Ubicación",
-                "fecha_de_alta":"Fecha de operación"
-                }                              
-                    
-        mensaje_alerta=""
-        if len(clientes)==0:
-            titulo = {}
-            mensaje_alerta="Cliente inexistente en la base de datos."
-
-        return render (request, "Inmo_Coder_App/clientes_buscar.html", {"clientes":clientes, "titulo":titulo, "mensaje":mensaje_alerta,"imagen":loadavatar(request),"chat":haymensaje(request)})
-    else:
-        ocultar_contenido_inicial=True
-        return render (request, "Inmo_Coder_App/clientes_buscar.html", {"ocultar_contenido_inicial":ocultar_contenido_inicial,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 
 def login_request(request):
@@ -501,7 +450,7 @@ def departamentos_editar(request, id):
                 "contacto_email":departamento.contacto_email, "fecha_alta":departamento.fecha_de_alta,})
         return render(request, "Inmo_Coder_App/departamentos_editar.html", {"miformulario":miformulario, "id": departamento.id, "imagen":loadavatar(request),"chat":haymensaje(request)})
 
-###COMPLEMENTOS DE 1er PRE ENTREGA - DEPARTAMENTOS
+###COMPLEMENTOS DE 1er PRE ENTREGA - COCHERAS
 
 def cocheras_listar(request):
     cocheras=Cocheras.objects.all()
@@ -560,79 +509,6 @@ def cocheras_editar(request, id):
                 "contacto_email":cochera.contacto_email, "fecha_de_alta":cochera.fecha_de_alta,})
         return render(request, "Inmo_Coder_App/cocheras_editar.html", {"miformulario":miformulario, "id": cochera.id, "imagen":loadavatar(request),"chat":haymensaje(request)})
 
-
-
-# class DepartamentosList(ListView):
-#     model=Departamentos
-#     template_name="Inmo_Coder_App/leerDepartamentos.html"
-
-# class DepartamentosDetalle(DetailView):
-#     model=Departamentos
-#     template_name="Inmo_Coder_App/departamentos_detalle.html"
-
-# class DepartamentosCreacion(CreateView):
-#     model = Departamentos
-#     success_url = reverse_lazy('departamentos_listar')
-#     fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
-
-# class DepartamentosUpdate(UpdateView):
-#     model = Departamentos
-#     success_url = reverse_lazy('departamentos_listar')
-#     fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
-
-# class DepartamentosDelete(DeleteView):
-#     model = Departamentos
-#     success_url = reverse_lazy('departamentos_listar')
-
-
-class CocherasList(ListView):
-    model=Cocheras
-    template_name="Inmo_Coder_App/leerCocheras.html"
-
-class CocherasDetalle(DetailView):
-    model=Cocheras
-    template_name="Inmo_Coder_App/cocheras_detalle.html"
-
-class CocherasCreacion(CreateView):
-    model = Cocheras
-    success_url = reverse_lazy('cocheras_listar')
-    fields=['ubicacion', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
-
-class CocherasUpdate(UpdateView):
-    model = Cocheras
-    success_url = reverse_lazy('cocheras_listar')
-    fields=['ubicacion', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
-
-class CocherasDelete(DeleteView):
-    model = Cocheras
-    success_url = reverse_lazy('cocheras_listar')
-
-class ClientesList(ListView):
-    model=Clientes
-    template_name="Inmo_Coder_App/leerClientes.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['imagen'] = loadavatar(self.request)
-        return context
-
-class ClientesDetalle(DetailView):
-    model=Clientes
-    template_name="Inmo_Coder_App/clientes_detalle.html"
-
-class ClientesCreacion(CreateView):
-    model = Clientes
-    success_url = reverse_lazy('clientes_listar')
-    fields=['motivo_descripcion', 'motivo_ubicacion', 'motivo_precio','contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
-
-class ClientesUpdate(UpdateView):
-    model = Clientes
-    success_url = reverse_lazy('clientes_listar')
-    fields=['motivo_descripcion', 'motivo_ubicacion', 'motivo_precio','contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
-
-class ClientesDelete(DeleteView):
-    model = Clientes
-    success_url = reverse_lazy('clientes_listar')
 ################# Views referida a ABOUT (acerca de mi): ################
 
 def about (request):
@@ -640,8 +516,6 @@ def about (request):
         return render (request, "Inmo_Coder_App/about.html",{"imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
         return render (request, "Inmo_Coder_App/about.html")
-
-
 
 ##################### Views referida a BLOGS ############################
 

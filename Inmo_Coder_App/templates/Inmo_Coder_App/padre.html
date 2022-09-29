@@ -72,19 +72,6 @@
                     </ul>
                 </div>
 
-                {% if request.user.is_authenticated %}
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Clientes</a>
-                  
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item" href="{% url 'clientes_buscar' %}">Buscar clientes</a></li>
-                      <li><a class="dropdown-item" href="{% url 'clientes_cargar' %}">Carga clientes</a></li>
-                      <li><a class="dropdown-item" href="{% url 'clientes_listar' %}">Listado de clientes</a></li>
-                    
-                    </ul>
-                </div>
-                {% endif %}
-
                 <div class="dropdown">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
                   

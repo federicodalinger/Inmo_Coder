@@ -5,6 +5,5 @@ from .models import *
 admin.site.register(Casas)
 admin.site.register(Departamentos)
 admin.site.register(Cocheras)
-admin.site.register(Clientes)
 admin.site.register(Blog)
 admin.site.register(Avatar)

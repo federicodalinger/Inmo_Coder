@@ -31,25 +31,7 @@ urlpatterns = [
     path("cocheras_eliminar/<id>", cocheras_eliminar, name="cocheras_eliminar"),
     path("cocheras_editar/<id>", cocheras_editar, name="cocheras_editar"),
 
-    path("clientes_buscar/", clientes_buscar, name="clientes_buscar"),
-    path("clientes_cargar/", clientes_cargar, name="clientes_cargar"),
-
     path("about/", about, name="about"),
-
-
-
-    # path("cocheras/list/", CocherasList.as_view(), name="cocheras_listar"),
-    # path("cocheras/<pk>", CocherasDetalle.as_view(), name="cocheras_detalle"),
-    # path("cocheras/nuevo/", CocherasCreacion.as_view(), name='cocheras_crear'),
-    # path("cocheras/editar/<pk>", CocherasUpdate.as_view(), name='cocheras_editar'),
-    # path("cocheras/borrar/<pk>", CocherasDelete.as_view(), name='cocheras_borrar'),
-
-    path("clientes/list/", ClientesList.as_view(), name="clientes_listar"),
-    path("clientes/<pk>", ClientesDetalle.as_view(), name="clientes_detalle"),
-    path("clientes/nuevo/", ClientesCreacion.as_view(), name='clientes_crear'),
-    path("clientes/editar/<pk>", ClientesUpdate.as_view(), name='clientes_editar'),
-    path("clientes/borrar/<pk>", ClientesDelete.as_view(), name='clientes_borrar'),
-
 
     path("blog_crear/", blog_crear, name="blog_crear"),
     path("pages/", blog_listar, name="blog_listar"),
@@ -57,9 +39,11 @@ urlpatterns = [
     path("blog_confirm_eliminar/<id>", blog_confirm_eliminar, name="blog_confirm_eliminar"),
     path("blog_eliminar/<id>", blog_eliminar, name="blog_eliminar"),
     path("blog_editar/<id>", blog_editar, name="blog_editar"),
+
     path("login/", login_request, name="login_request"),
     path("signin/", signin_request, name="signin_request"),
     path("logout/", LogoutView.as_view(template_name="Inmo_Coder_App/templates/Inmo_Coder_App/logout.html"),name="logout"),
+
     path("editarperfil/", editarperfil, name="editarperfil"),
     path("cargaravatar/", cargaravatar, name="cargaravatar"),
 ]
