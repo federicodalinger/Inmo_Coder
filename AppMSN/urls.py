@@ -12,4 +12,6 @@ app_name = 'AppMSN'
 urlpatterns = [
     path("mensajes/", mensajes, name="mensajes"), 
     path("enviarmensaje/", enviarmensaje, name="enviarmensaje"),
+    path("mensaje_eliminar/<id>", mensaje_eliminar, name="mensaje_eliminar"),
+    path("mensaje_responder/<id>", mensaje_responder, name="mensaje_responder"),
     ]

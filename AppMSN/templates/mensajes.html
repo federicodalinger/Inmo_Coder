@@ -5,10 +5,10 @@
 
 {% block usuariologged %} 
     {% if request.user.is_authenticated %}
-        Hola {{ user.username }} !!  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
-        <form action="{% url 'AppMSN:mensajes' %}" method="POST" class="border p-3 form"> {% csrf_token %}
-            <button type="submit" class="button-solid">Mensajes!!<img src="{{ chat }}" alt="mensajes" width="35px" hight="35px"></button>
-        </form>
+    <form action="{% url 'AppMSN:mensajes' %}" method="POST" > {% csrf_token %}
+        Hola {{ user.username }}  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+        <button type="submit" class="button-solid"> <img src='{{ chat }}' alt ="mensajes" width="35px" hight="35px"></button>
+    </form>
        
     {% endif %}
 
@@ -17,7 +17,7 @@
 
 {% block titulo_de_pagina %}
 
-    <h1 class="mb-5">INMO. CODER<br>INICIO</h1>
+    <h1 class="mb-5">INMO. CODER<br>MENSAJES</h1>
 
     
 {% endblock %}
@@ -26,32 +26,52 @@
 
 {% block contenido_que_cambia %}
 
-    <br>
-    <h3> </h3>
-    {% if mensaje %}
-    <h8>{{ mensaje }}</h8>
-    
+<br>
+
+{% if mensaje %}
+    <div class="abs-center">
+        <h3> {{ mensaje }}</h3>
+    </div>
 {% else %}
-    <table>
-        <tbody>
-            <tr>
-                <th class="clases_para_th_td">Mensaje de:</th>
-                <th class="clases_para_th_td">Mensaje</th>
+
+
+<div class="container">
+    <div class="abs-center">
+        <table>
+            <tbody>
+                <tr>
+                    <th class="clases_para_th_td">Emisor</th>
+                    <th class="clases_para_th_td">Mensaje</th>
+                    <th class="clases_para_th_td">Desea borrar?</th> 
+                    <th class="clases_para_th_td">Desea responderle?</th>    
+                </tr> 
                 
-            </tr> 
-        
-            {% for msj in lista_mensajes %}    
-            <tr>
-                <td class="clases_para_th_td">{{ msj }}</td>
-                                
-            </tr>
-            {% endfor %}
+                {% for mensaje in lista_mensajes %}    
+                <tr>
+                    <td class="clases_para_th_td">{{ mensaje.usuarioA }}</td>
+                    <td class="clases_para_th_td">{{ mensaje.mensaje }}</td>   
+                    <td class="clases_para_th_td">
+                        <form action="{% url 'AppMSN:mensaje_eliminar' mensaje.id %}" method="POST"> {% csrf_token %}
+                            <div class="abs-center">
+                                <input type="submit" value="Si" class="btn btn-warning btn-sm">  
+                            </div>
+                        </form>                 
+                    </td>     
+                    <td class="clases_para_th_td">
+                        <form action="{% url 'AppMSN:mensaje_responder' mensaje.id %}" method="GET"> {% csrf_token %}
+                            <div class="abs-center">
+                                <input type="submit" value="Si" class="btn btn-primary btn-sm">  
+                            </div>
+                        </form>                 
+                    </td>             
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
-        </tbody>
-    </table>
-    
-{% endif %}
-
-    
+<br>
+{% endif %}    
 {% endblock %}
 

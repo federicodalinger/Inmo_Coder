@@ -4,15 +4,17 @@
 
 {% block usuariologged %} 
     {% if request.user.is_authenticated %}
-    Hola {{ user.username }} !!  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
-    <button type="button" class="button-solid"> <img src='{{ chat }}' alt ="mensajes" width="35px" hight="35px"></button>
+    <form action="{% url 'AppMSN:mensajes' %}" method="POST" > {% csrf_token %}
+        Hola {{ user.username }}  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+        <button type="submit" class="button-solid"> <img src='{{ chat }}' alt ="mensajes" width="35px" hight="35px"></button>
+    </form>
     {% endif %}
 
 {% endblock %}
 
 {% block titulo_de_pagina %}
 
-    <h1 class="mb-5">Enviar<br>Mensajes </h1>
+    <h1 class="mb-5">INMO. CODER<br>ENVIAR MENSAJE</h1>
    
 {% endblock %}
 
