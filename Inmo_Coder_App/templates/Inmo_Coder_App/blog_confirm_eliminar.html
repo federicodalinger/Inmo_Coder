@@ -41,9 +41,11 @@
         <div class="abs-center">
             <h6>{{ blog.cuerpo_texto | safe }}</h6>
         </div>
+        {% if blog.imagen %}
         <div class="abs-center">
-            <h6>{{ blog.imagen }}</h6>
+            <img src="../../media/{{ blog.imagen }}" alt="" width="400" height="400">
         </div>
+        {% endif %}
         <div style="display: flex; justify-content: space-around">
             <h6>Autor: {{ blog.autor }}</h6> 
             <h6>Fecha de creación: {{ blog.fecha_creacion }}</h6>

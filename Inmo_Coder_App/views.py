@@ -285,7 +285,7 @@ def signin_request(request):
     else:
         form = UserRegisterForm()
     #return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form,"imagen": loadavatar(request),"chat":haymensaje(request)})
-    return render(request, "Inmo_Coder_App/signin.html", {"form":form})#,"imagen": loadavatar(request),"chat":haymensaje(request)})
+    return render(request, "Inmo_Coder_App/signin.html", {"form":form, "imagen": loadavatar(request),"chat":haymensaje(request)})#,"imagen": loadavatar(request),"chat":haymensaje(request)})
 
 ##@login_required
 def editarperfil(request):
@@ -621,6 +621,7 @@ def blog_editar(request, id):
             blog.imagen=info["imagen"]
             blog.save()
             print("guarda blog")
+            print ("blog.imagen")
 
             ### Muestro de nuevo haciendo un render de lo restante.
             blogs=Blog.objects.all()
