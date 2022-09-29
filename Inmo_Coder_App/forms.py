@@ -82,9 +82,9 @@ class UserEditForm(UserCreationForm):
     last_name=forms.CharField(label="Modificar Last Name")
     first_name=forms.CharField(label="Modificar First Name")
     class Meta:
-       model = User
-       fields = ["email", "password1","password2","last_name","first_name"]
-       help_texts = {k:"" for k in fields}
+        model = User #"password1","password2",
+        fields = ["email", "last_name","first_name","password1","password2"]
+        help_texts = {k:"" for k in fields}
 
 class AvatarForm(forms.Form):
 #class AvatarForm(forms.Form):

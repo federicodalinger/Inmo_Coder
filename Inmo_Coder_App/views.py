@@ -25,7 +25,6 @@ from AppMSN.views import mensajes, haymensaje
 from .functions import loadavatar
 
 
-
 # Create your views here.
 
 def inicio (request):
@@ -278,32 +277,38 @@ def signin_request(request):
             username=form.cleaned_data["username"]
             form.save()
     
-            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado"})
+            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado","imagen": loadavatar(request),"chat":haymensaje(request)})
 
     else:
         form = UserRegisterForm()
     return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form,"imagen": loadavatar(request),"chat":haymensaje(request)})
 
-#@login_required
+##@login_required
 def editarperfil(request):
 
     usuario=request.user
+    
     if request.method == "POST":
-        form = UserEditForm(request.POST)
+        form = UserEditForm(request.POST, instance=usuario) #, instance=usuario
         if form.is_valid():
             #informacion = form.cleaned_data
-            usuario.email = form.cleaned_data["email"]
-            usuario.password1 = form.cleaned_data["password1"]
-            usuario.password2 = form.cleaned_data["password2"]
-            usuario.last_name = form.cleaned_data["last_name"]
-            usuario.first_name = form.cleaned_data["first_name"]
+            #usuario.email = form.cleaned_data["email"]
+            #usuario.password1 = form.cleaned_data["password1"]
+            #usuario.password2 = form.cleaned_data["password2"]
+            #usuario.last_name = form.cleaned_data["last_name"]
+            #usuario.first_name = form.cleaned_data["first_name"]
             usuario.save()
 
             return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Perfil de {usuario} editado","imagen":loadavatar(request),"chat":haymensaje(request)})
-
+        else:
+            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Error en la edicion del perfil","imagen":loadavatar(request),"chat":haymensaje(request)})
     else:
-        form = UserEditForm(instance=usuario)
-    return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/editarperfil.html",{"usuario":usuario,"form":form,"imagen":loadavatar(request),"chat":haymensaje(request)})
+
+        formulario = UserEditForm(instance=usuario)
+        
+        return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/editarperfil.html",{"usuario":usuario,"form":formulario,"imagen":loadavatar(request),"chat":haymensaje(request)})
+        
+######################################################################################
 
 def cargaravatar(request):
 
@@ -629,3 +634,6 @@ def blog_editar(request, id):
             }
         )
         return render(request, "Inmo_Coder_App/blog_editar.html", {"miformulario":miformulario, "titulo":blog.titulo, "id": blog.id, "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+
+
