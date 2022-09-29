@@ -328,12 +328,13 @@ def signin_request(request):
         if form.is_valid():
             username=form.cleaned_data["username"]
             form.save()
-    
-            return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado"})
+            #return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado"})
+            return render(request,"Inmo_Coder_App/inicio.html", {"mensaje":f"Usuario {username} creado"})
 
     else:
         form = UserRegisterForm()
-    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form,"imagen": loadavatar(request),"chat":haymensaje(request)})
+    #return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form,"imagen": loadavatar(request),"chat":haymensaje(request)})
+    return render(request, "Inmo_Coder_App/signin.html", {"form":form})#,"imagen": loadavatar(request),"chat":haymensaje(request)})
 
 #@login_required
 def editarperfil(request):
@@ -397,6 +398,7 @@ class CasasCreacion(CreateView):
     success_url = reverse_lazy('casas_listar')
     fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
 
+#@permission_required("admin.create_post", login_url="/signin_request", raise_exception=True)
 class CasasUpdate(UpdateView):
     model = Casas
     success_url = reverse_lazy('casas_listar')
