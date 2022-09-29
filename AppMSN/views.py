@@ -48,17 +48,17 @@ def mensajes(request):
 
             print(lista_mensajes)
             if len(lista)==0:
-                mensaje="Ustedes no tiene mensajes!"
-                return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensajes":mensajes,"usuario": request.user,"imagen": loadavatar(request),"chat": haymensaje(request),"listamensajes":lista})
+                mensaje="Usted no tiene mensajes!"
+                return render(request,"AppMSN/templates/mensajes.html",{"mensaje":mensaje,"usuario": request.user,"imagen": loadavatar(request),"chat": haymensaje(request),"listamensajes":lista})
             else:
                 #print("hola"+haymensaje(request))
                 Mensajes.objects.all().update(Leido=True)
 
                 return render(request,"AppMSN/templates/mensajes.html",{"usuario": request.user,"imagen": loadavatar(request),"chat": haymensaje(request),"lista_mensajes":lista})
-            return render(request,)
+            #return render(request,)
     else:
         #print("Salio por el Else")
-        return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"usuario": request.user,"imagen": loadavatar(request),"chat": haymensaje(request),"listamensajes":lista})
+        return render(request,"AppMSN/templates/mensajes.html")#,{"usuario": request.user,"imagen": loadavatar(request),"chat": haymensaje(request),"listamensajes":lista})
 
 def enviarmensaje(request):
         

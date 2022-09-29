@@ -279,10 +279,13 @@ def signin_request(request):
             form.save()
     
             return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado","imagen": loadavatar(request),"chat":haymensaje(request)})
+            #return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/inicio.html",{"mensaje":f"Usuario {username} creado"})
+            return render(request,"Inmo_Coder_App/inicio.html", {"mensaje":f"Usuario {username} creado"})
 
     else:
         form = UserRegisterForm()
-    return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form,"imagen": loadavatar(request),"chat":haymensaje(request)})
+    #return render(request, "Inmo_Coder_App/templates/Inmo_Coder_App/signin.html",{"form": form,"imagen": loadavatar(request),"chat":haymensaje(request)})
+    return render(request, "Inmo_Coder_App/signin.html", {"form":form})#,"imagen": loadavatar(request),"chat":haymensaje(request)})
 
 ##@login_required
 def editarperfil(request):
@@ -308,26 +311,6 @@ def editarperfil(request):
         
         return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/editarperfil.html",{"usuario":usuario,"form":formulario,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
-# def editarPerfil(request):
-#     usuario = request.user
-#     if request.method=="POST":
-#         form=UserEditForm(request.POST)
-#         if form.is_valid():
-#             info=form.cleaned_data
-#             usuario.email=info["email"]
-#             usuario.password=make_password(info["password1"])
-#             # usuario.password1=make_password(info["password1"])
-#             # usuario.password2=make_password(info["password2"])
-#             usuario.first_name=info["first_name"]
-#             usuario.last_name=info["last_name"]
-#             usuario.save()
-#             print("usuario guardado")
-
-#             return render(request, "MVT_DALINGER_App/inicio.html", {"mensaje": f"Perfil de {usuario} editado."})
-
-#         else:
-#             form=UserEditForm()
-#             return render(request, "MVT_DALINGER_App/editarPerfil.html", {"mensaje": "form invalido", "form": form})
 
 ######################################################################################
 
