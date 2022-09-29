@@ -10,6 +10,6 @@ from .views import *
 app_name = 'AppMSN'
 
 urlpatterns = [
-    path("mensajes", mensajes, name="mensajes"), 
+    path("mensajes/", mensajes, name="mensajes"), 
     path("enviarmensaje/", enviarmensaje, name="enviarmensaje"),
     ]
