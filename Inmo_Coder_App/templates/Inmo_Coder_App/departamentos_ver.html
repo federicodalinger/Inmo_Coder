@@ -1,0 +1,60 @@
+{% extends "Inmo_Coder_App/padre.html" %}
+
+{% load static %}
+
+{% block usuariologged %} 
+    {% if request.user.is_authenticated %}
+            
+    <form action="{% url 'AppMSN:mensajes' %}" method="POST" > {% csrf_token %}
+        Hola {{ user.username }}  <img src='{{ imagen }}' alt ="avatar" width="35px" hight="35px">
+        <button type="submit" class="button-solid"> <img src='{{ chat }}' alt ="mensajes" width="35px" hight="35px"></button>
+    </form>
+    {% endif %}
+
+{% endblock %}
+
+{% block titulo_de_pagina %}
+
+    <h1 class="mb-5">VER<br>DEPARTAMENTO</h1>
+   
+{% endblock %}
+
+
+{% block contenido_que_cambia %}
+
+<br>
+{% if mensaje %}
+    <h2>{{ mensaje }}</h2>
+
+{% else %}
+
+<div class="abs-center">
+    <table>
+        <tbody>
+            <tr>
+                <th class="clases_para_th_td">Nombre</th>
+                <th class="clases_para_th_td">Teléfono</th>
+                <th class="clases_para_th_td">E-mail</th>
+                <th class="clases_para_th_td">Ambientes</th>
+                <th class="clases_para_th_td">Precio</th>
+                <th class="clases_para_th_td">Ubicación</th>
+                <th class="clases_para_th_td">Fecha de Alta</th>
+            </tr> 
+        
+            <tr>
+                <td class="clases_para_th_td">{{ departamento.contacto_nombre }}</td>
+                <td class="clases_para_th_td">{{ departamento.contacto_telefono }}</td>
+                <td class="clases_para_th_td">{{ departamento.contacto_email }}</td>
+                <td class="clases_para_th_td">{{ departamento.ambientes }}</td>
+                <td class="clases_para_th_td">{{ departamento.precio }}</td>
+                <td class="clases_para_th_td">{{ departamento.ubicacion }}</td>
+                <td class="clases_para_th_td">{{ departamento.fecha_de_alta }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+    
+{% endif %}
+
+{% endblock %}

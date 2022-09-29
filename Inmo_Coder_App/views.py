@@ -381,52 +381,208 @@ def cargaravatar(request):
     return render(request,"Inmo_Coder_App/templates/Inmo_Coder_App/cargaravatar.html",{"miformulario":miformulario,"imagen":loadavatar(request),"chat":haymensaje(request)})
 
 
-###PARA CLASES BASADAS EN VISTAS
+###COMPLEMENTOS DE 1er PRE ENTREGA - CASAS
 
-class CasasList(ListView):
-    model=Casas
-    template_name="Inmo_Coder_App/leerCasas.html"
+def casas_listar(request):
+    casas=Casas.objects.all()
+    if len(casas)!=0:
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/casas_listar.html",{"casas":casas, "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/casas_listar.html", {"casas":casas})
+    else:
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/casas_listar.html",{"mensaje":"No hay casas registradas.", "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/casas_listar.html", {"mensaje":"No hay casas registradas."})
+
+def casas_ver(request, id):
+    casa=Casas.objects.get(id=id)
+    if request.user.is_authenticated :#or request.user != "AnonymousUser":
+        return render (request, "Inmo_Coder_App/casas_ver.html",{"casa":casa, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        return render (request, "Inmo_Coder_App/casas_ver.html",{"casa":casa})
+
+def casas_confirm_delete(request, id):
+    casa=Casas.objects.get(id=id)
+    return render(request, "Inmo_Coder_App/casas_confirm_delete.html", {"casa": casa, "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+def casas_eliminar(request, id):
+    casa=Casas.objects.get(id=id)
+    casa.delete()
+    casas=Casas.objects.all()
+    if len(casas)!=0:
+        return render(request, "Inmo_Coder_App/casas_listar.html", {"casas": casas, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        return render(request, "Inmo_Coder_App/casas_listar.html", {"mensaje":"Se borraron todas las casas.", "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+def casas_editar(request, id):
+    casa=Casas.objects.get(id=id)
+    if request.method=="POST":
+        miformulario=Cargocasa(request.POST)
+        if miformulario.is_valid():
+            info=miformulario.cleaned_data
+            casa.ubicacion=info["ubicacion"]
+            casa.ambientes=info["ambientes"]
+            casa.precio=info["precio"]
+            casa.contacto_nombre=info["contacto_nombre"]
+            casa.contacto_telefono=info["contacto_telefono"]
+            casa.contacto_email=info["contacto_email"]
+            casa.fecha_de_alta=info["fecha_alta"]
+            casa.save()
+            ### Muestro de nuevo haciendo un render de lo restante.
+            casas=Casas.objects.all()
+            return render(request, "Inmo_Coder_App/casas_listar.html", {"casas": casas, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        miformulario=Cargocasa(
+            initial={
+                "ubicacion":casa.ubicacion, "ambientes":casa.ambientes, "precio":casa.precio,
+                "contacto_nombre":casa.contacto_nombre, "contacto_telefono":casa.contacto_telefono,
+                "contacto_email":casa.contacto_email, "fecha_alta":casa.fecha_de_alta,})
+        return render(request, "Inmo_Coder_App/casas_editar.html", {"miformulario":miformulario, "id": casa.id, "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+###COMPLEMENTOS DE 1er PRE ENTREGA - DEPARTAMENTOS
+
+def departamentos_listar(request):
+    departamentos=Departamentos.objects.all()
+    if len(departamentos)!=0:
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/departamentos_listar.html",{"departamentos":departamentos, "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/departamentos_listar.html", {"departamentos":departamentos})
+    else:
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/departamentos_listar.html",{"mensaje":"No hay departamentos registrados.", "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/departamentos_listar.html", {"mensaje":"No hay departamentos registrados."})
+
+def departamentos_ver(request, id):
+    departamento=Departamentos.objects.get(id=id)
+    if request.user.is_authenticated :#or request.user != "AnonymousUser":
+        return render (request, "Inmo_Coder_App/departamentos_ver.html",{"departamento":departamento, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        return render (request, "Inmo_Coder_App/departamentos_ver.html",{"departamento":departamento})
+
+def departamentos_confirm_delete(request, id):
+    departamento=Departamentos.objects.get(id=id)
+    return render(request, "Inmo_Coder_App/departamentos_confirm_delete.html", {"departamento": departamento, "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+def departamentos_eliminar(request, id):
+    departamento=Departamentos.objects.get(id=id)
+    departamento.delete()
+    departamentos=Departamentos.objects.all()
+    if len(departamentos)!=0:
+        return render(request, "Inmo_Coder_App/departamentos_listar.html", {"departamentos": departamentos, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        return render(request, "Inmo_Coder_App/departamentos_listar.html", {"mensaje":"Se borraron todos los departamentos.", "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+def departamentos_editar(request, id):
+    departamento=Departamentos.objects.get(id=id)
+    if request.method=="POST":
+        miformulario=Deptocarga(request.POST)
+        if miformulario.is_valid():
+            info=miformulario.cleaned_data
+            departamento.ubicacion=info["ubicacion"]
+            departamento.ambientes=info["ambientes"]
+            departamento.precio=info["precio"]
+            departamento.contacto_nombre=info["contacto_nombre"]
+            departamento.contacto_telefono=info["contacto_telefono"]
+            departamento.contacto_email=info["contacto_email"]
+            departamento.fecha_de_alta=info["fecha_alta"]
+            departamento.save()
+            ### Muestro de nuevo haciendo un render de lo restante.
+            departamentos=Departamentos.objects.all()
+            return render(request, "Inmo_Coder_App/departamentos_listar.html", {"departamentos": departamentos, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        miformulario=Deptocarga(
+            initial={
+                "ubicacion":departamento.ubicacion, "ambientes":departamento.ambientes, "precio":departamento.precio,
+                "contacto_nombre":departamento.contacto_nombre, "contacto_telefono":departamento.contacto_telefono,
+                "contacto_email":departamento.contacto_email, "fecha_alta":departamento.fecha_de_alta,})
+        return render(request, "Inmo_Coder_App/departamentos_editar.html", {"miformulario":miformulario, "id": departamento.id, "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+###COMPLEMENTOS DE 1er PRE ENTREGA - DEPARTAMENTOS
+
+def cocheras_listar(request):
+    cocheras=Cocheras.objects.all()
+    if len(cocheras)!=0:
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/cocheras_listar.html",{"cocheras":cocheras, "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/cocheras_listar.html", {"cocheras":cocheras})
+    else:
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render (request, "Inmo_Coder_App/cocheras_listar.html",{"mensaje":"No hay cocheras registradas.", "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/cocheras_listar.html", {"mensaje":"No hay cocheras registradas."})
+
+def cocheras_ver(request, id):
+    cochera=Cocheras.objects.get(id=id)
+    if request.user.is_authenticated :#or request.user != "AnonymousUser":
+        return render (request, "Inmo_Coder_App/cocheras_ver.html",{"cochera":cochera, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        return render (request, "Inmo_Coder_App/cocheras_ver.html",{"cochera":cochera})
+
+def cocheras_confirm_delete(request, id):
+    cochera=Cocheras.objects.get(id=id)
+    return render(request, "Inmo_Coder_App/cocheras_confirm_delete.html", {"cochera": cochera, "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+def cocheras_eliminar(request, id):
+    cochera=Cocheras.objects.get(id=id)
+    cochera.delete()
+    cocheras=Cocheras.objects.all()
+    if len(cocheras)!=0:
+        return render(request, "Inmo_Coder_App/cocheras_listar.html", {"cocheras": cocheras, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        return render(request, "Inmo_Coder_App/cocheras_listar.html", {"mensaje":"Se borraron todas las cocheras.", "imagen":loadavatar(request),"chat":haymensaje(request)})
+
+def cocheras_editar(request, id):
+    cochera=Cocheras.objects.get(id=id)
+    if request.method=="POST":
+        miformulario=CocherasFormulario(request.POST)
+        if miformulario.is_valid():
+            info=miformulario.cleaned_data
+            cochera.ubicacion=info["ubicacion"]
+            cochera.precio=info["precio"]
+            cochera.contacto_nombre=info["contacto_nombre"]
+            cochera.contacto_telefono=info["contacto_telefono"]
+            cochera.contacto_email=info["contacto_email"]
+            cochera.fecha_de_alta=info["fecha_de_alta"]
+            cochera.save()
+            ### Muestro de nuevo haciendo un render de lo restante.
+            cocheras=Cocheras.objects.all()
+            return render(request, "Inmo_Coder_App/cocheras_listar.html", {"cocheras": cocheras, "imagen":loadavatar(request),"chat":haymensaje(request)})
+    else:
+        miformulario=CocherasFormulario(
+            initial={
+                "ubicacion":cochera.ubicacion, "precio":cochera.precio,
+                "contacto_nombre":cochera.contacto_nombre, "contacto_telefono":cochera.contacto_telefono,
+                "contacto_email":cochera.contacto_email, "fecha_de_alta":cochera.fecha_de_alta,})
+        return render(request, "Inmo_Coder_App/cocheras_editar.html", {"miformulario":miformulario, "id": cochera.id, "imagen":loadavatar(request),"chat":haymensaje(request)})
 
 
-class CasasDetalle(DetailView):
-    model=Casas
-    template_name="Inmo_Coder_App/casas_detalle.html"
 
-class CasasCreacion(CreateView):
-    model = Casas
-    success_url = reverse_lazy('casas_listar')
-    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+# class DepartamentosList(ListView):
+#     model=Departamentos
+#     template_name="Inmo_Coder_App/leerDepartamentos.html"
 
-class CasasUpdate(UpdateView):
-    model = Casas
-    success_url = reverse_lazy('casas_listar')
-    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
+# class DepartamentosDetalle(DetailView):
+#     model=Departamentos
+#     template_name="Inmo_Coder_App/departamentos_detalle.html"
 
-class CasasDelete(DeleteView):
-    model = Casas
-    success_url = reverse_lazy('casas_listar')
+# class DepartamentosCreacion(CreateView):
+#     model = Departamentos
+#     success_url = reverse_lazy('departamentos_listar')
+#     fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
 
-class DepartamentosList(ListView):
-    model=Departamentos
-    template_name="Inmo_Coder_App/leerDepartamentos.html"
+# class DepartamentosUpdate(UpdateView):
+#     model = Departamentos
+#     success_url = reverse_lazy('departamentos_listar')
+#     fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
 
-class DepartamentosDetalle(DetailView):
-    model=Departamentos
-    template_name="Inmo_Coder_App/departamentos_detalle.html"
-
-class DepartamentosCreacion(CreateView):
-    model = Departamentos
-    success_url = reverse_lazy('departamentos_listar')
-    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
-
-class DepartamentosUpdate(UpdateView):
-    model = Departamentos
-    success_url = reverse_lazy('departamentos_listar')
-    fields=['ubicacion', 'ambientes', 'precio', 'contacto_nombre', 'contacto_telefono', 'contacto_email', 'fecha_de_alta']
-
-class DepartamentosDelete(DeleteView):
-    model = Departamentos
-    success_url = reverse_lazy('departamentos_listar')
+# class DepartamentosDelete(DeleteView):
+#     model = Departamentos
+#     success_url = reverse_lazy('departamentos_listar')
 
 
 class CocherasList(ListView):
@@ -454,6 +610,11 @@ class CocherasDelete(DeleteView):
 class ClientesList(ListView):
     model=Clientes
     template_name="Inmo_Coder_App/leerClientes.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['imagen'] = loadavatar(self.request)
+        return context
 
 class ClientesDetalle(DetailView):
     model=Clientes
@@ -532,18 +693,21 @@ def blog_ver(request, id):
     blog=Blog.objects.get(id=id)
 
     if blog.cuerpo_texto!="":
-
+        print("hay info en el cuerpo")
         if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            print("entre con usuario al render")
             return render (request, "Inmo_Coder_App/blog_ver.html",{"blog":blog, "imagen":loadavatar(request),"chat":haymensaje(request)})
         else:
-            if request.user.is_authenticated :#or request.user != "AnonymousUser":
-                return render (request, "Inmo_Coder_App/blog_ver.html",{"mensaje":"No hay información aún (cuerpo vacío).", "imagen":loadavatar(request),"chat":haymensaje(request)})
-            else:
-                return render (request, "Inmo_Coder_App/blog_ver.html")
-
+            print("entre SIN usuario al render")
+            return render (request, "Inmo_Coder_App/blog_ver.html",{"blog":blog})
 
     else:
-        return render(request, "Inmo_Coder_App/blog_ver.html", {"mensaje":""})
+        print("NO hay info en el cuerpo")
+        if request.user.is_authenticated :#or request.user != "AnonymousUser":
+            return render(request, "Inmo_Coder_App/blog_ver.html", {"mensaje":"No hay información aún (cuerpo vacío).", "imagen":loadavatar(request),"chat":haymensaje(request)})
+        else:
+            return render (request, "Inmo_Coder_App/blog_ver.html",{"mensaje":"No hay información aún (cuerpo vacío)."})
+
 
 def blog_confirm_eliminar(request, id):
     blog=Blog.objects.get(id=id)

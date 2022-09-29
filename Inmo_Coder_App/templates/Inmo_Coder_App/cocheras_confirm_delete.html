@@ -19,7 +19,7 @@
 
 {% block contenido_que_cambia %}
 
-<form method="POST"> {% csrf_token %} 
+<form action="{% url 'cocheras_eliminar' cochera.id %}"method="POST"> {% csrf_token %} 
     
     <br>
     <div class="abs-center">
@@ -40,12 +40,12 @@
                 </tr> 
                 
                 <tr>
-                    <td class="clases_para_th_td">{{ object.contacto_nombre }}</td>
-                    <td class="clases_para_th_td">{{ object.contacto_telefono }}</td>
-                    <td class="clases_para_th_td">{{ object.contacto_email }}</td>
-                    <td class="clases_para_th_td">{{ object.precio }}</td>
-                    <td class="clases_para_th_td">{{ object.ubicacion }}</td>
-                    <td class="clases_para_th_td">{{ object.fecha_de_alta }}</td>
+                    <td class="clases_para_th_td">{{ cochera.contacto_nombre }}</td>
+                    <td class="clases_para_th_td">{{ cochera.contacto_telefono }}</td>
+                    <td class="clases_para_th_td">{{ cochera.contacto_email }}</td>
+                    <td class="clases_para_th_td">{{ cochera.precio }}</td>
+                    <td class="clases_para_th_td">{{ cochera.ubicacion }}</td>
+                    <td class="clases_para_th_td">{{ cochera.fecha_de_alta }}</td>
                 </tr>
             </tbody>
         </table>
